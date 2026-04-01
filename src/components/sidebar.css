@@ -1,5 +1,6 @@
 .side{
-  width: 45px;
+  width: 70px;
+  height: 50px;
   overflow: hidden;
 }
 .side.active{
@@ -12,15 +13,18 @@
   transition: width 0.25s ease;
 }
 .side button{
-  background: none;
+  background:  #442383;;
   border: none;
   border-radius: 10px;
   width: 50px;
   height: 40px;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 40px;
 }
 
+.side.active button{
+  background: none;
+}
 .side button:hover{
   background: #e9e9e9;
 }

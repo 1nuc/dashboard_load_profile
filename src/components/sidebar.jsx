@@ -7,7 +7,7 @@ export default function Sidebar(){
 
   return(
     <nav className= {`side ${active? "active": "" }`}>
-          <button onClick={() => setActive(!active)}> 📎 </button>
+          <button onClick={() => setActive(!active)}> ≣</button>
           <ul>
               <li><Link to ="/"> Home</Link></li> 
               <li><Link to ="/dashboard"> Dashboard</Link></li> 
