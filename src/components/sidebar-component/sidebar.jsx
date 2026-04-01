@@ -18,7 +18,7 @@ export default function Sidebar(){
               {sidebar_elements.map((item) =>( 
               <li key={item.id}>
                 <Link to ={`/${item.panel}`}>
-                   {item.label}
+                   {item.label} {"   "}
                    {active && <span>{item.panel}</span>}
                 </Link>
               </li> 
