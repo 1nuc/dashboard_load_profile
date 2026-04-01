@@ -9,6 +9,7 @@ Title,
 Tooltip,
 Legend
 } from "chart.js";
+import { Data } from './dataset'
 
 ChartJS.register(
   CategoryScale,
@@ -21,5 +22,13 @@ ChartJS.register(
 );
 
 export const LinePlot = (props)=>{
-  return <Line options={props.options} data={props.data}/>
+  const options= {
+    maintainAspectRatio: false,
+  }
+  return ( 
+    <div className="line-card">
+      <Line options={options} data={Data}/>
+    </div>
+  )
+
 }
