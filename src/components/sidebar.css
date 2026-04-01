@@ -1,0 +1,52 @@
+.side{
+  width: 45px;
+  overflow: hidden;
+}
+.side.active{
+  width: 230px;
+  height: 100vh;
+  background-color: #442383;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  transition: width 0.25s ease;
+}
+.side button{
+  background: none;
+  border: none;
+  border-radius: 10px;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.side button:hover{
+  background: #e9e9e9;
+}
+
+.side.active ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.side.active ul li a{
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  white-space: nowrap;
+}
+.side.active ul li a:hover{
+  background: #442399;
+}
+
+
+.side ul{
+  display: none;
+}
