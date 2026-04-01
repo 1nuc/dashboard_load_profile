@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { MultiType } from "react-chartjs-2";
 import { 
 Chart as ChartJS,
 CategoryScale,
@@ -9,7 +9,7 @@ Title,
 Tooltip,
 Legend
 } from "chart.js";
-import { Data } from './dataset'
+import { Data } from '../dataset/dataset'
 
 ChartJS.register(
   CategoryScale,
@@ -21,13 +21,13 @@ ChartJS.register(
   Legend
 );
 
-export const LinePlot = (props)=>{
+export const MultiTypePlot = (props)=>{
   const options= {
     maintainAspectRatio: false,
   }
   return ( 
-    <div className="line-card">
-      <Line options={options} data={Data}/>
+    <div className="multitype-card">
+      <MultiType options={options} data={Data}/>
     </div>
   )
 

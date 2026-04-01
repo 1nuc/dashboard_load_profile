@@ -9,7 +9,7 @@ Title,
 Tooltip,
 Legend
 } from "chart.js";
-import { Data } from './dataset'
+import { Data } from '../dataset/dataset'
 
 ChartJS.register(
   CategoryScale,

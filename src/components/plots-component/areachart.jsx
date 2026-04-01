@@ -1,4 +1,4 @@
-import { Bar } from "react-chartjs-2";
+import { PolarArea } from "react-chartjs-2";
 import { 
 Chart as ChartJS,
 CategoryScale,
@@ -9,7 +9,7 @@ Title,
 Tooltip,
 Legend
 } from "chart.js";
-import { Data } from './dataset'
+import { Data } from '../dataset/dataset'
 
 ChartJS.register(
   CategoryScale,
@@ -21,13 +21,13 @@ ChartJS.register(
   Legend
 );
 
-export const BarPlot = (props)=>{
+export const AreaPlot = (props)=>{
   const options= {
     maintainAspectRatio: false,
   }
   return ( 
-    <div className="bar-card">
-      <Bar options={options} data={Data}/>
+    <div className="area-card">
+      <PolarArea options={options} data={Data}/>
     </div>
   )
 

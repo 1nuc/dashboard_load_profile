@@ -1,4 +1,4 @@
-.line-card, .area-card, .pie-card, .bar-card {
+.line-card, .area-card, .pie-card, .bar-card, .doughnut-card, .multitype-card {
   flex: 1 1 400px;
   height: 400px;
   padding: 20px;
@@ -29,7 +29,7 @@ body {
   box-sizing: border-box;
 }
 
-.line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas {
+.line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas .doughnat-card canvas, .multitype-card canvas {
   height: 100% !important;
   width: 100% !important;
 }
