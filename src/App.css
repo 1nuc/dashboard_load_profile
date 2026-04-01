@@ -16,7 +16,7 @@ body {
   overflow: hidden;
 }
 
-.App {
+.dashboard {
   height: 100vh;
   flex: 1;
   overflow-y: auto;
@@ -29,7 +29,7 @@ body {
   box-sizing: border-box;
 }
 
-.line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas .doughnat-card canvas, .multitype-card canvas {
+.line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas, .doughnut-card canvas, .multitype-card canvas {
   height: 100% !important;
   width: 100% !important;
 }

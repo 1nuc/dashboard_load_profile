@@ -1,26 +1,6 @@
 import { PolarArea } from "react-chartjs-2";
-import { 
-Chart as ChartJS,
-CategoryScale,
-LinearScale,
-PointElement,
-LineElement,
-Title,
-Tooltip,
-Legend
-} from "chart.js";
-import { Data } from '../dataset/dataset'
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
+import 'chart.js/auto';
+import { Data } from "../dataset/dataset";
 export const AreaPlot = (props)=>{
   const options= {
     maintainAspectRatio: false,
