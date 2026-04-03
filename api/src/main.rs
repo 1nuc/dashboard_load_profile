@@ -15,13 +15,13 @@ struct Data{
 }
 async fn get_data() -> String{
     let client=reqwest::Client::new();
-    let res=client.get("localhost:8000").send().await;
-
+    let res=client.get("http://localhost:8000/ids").send().await;
     match res{
         Ok(msg) => {
-            msg.json::<Data>().await.unwrap().data
+            // msg.json::<Data>().await.unwrap().data
+            msg.text().await.unwrap()
         } 
-        Err(_) => "failed to get the buildings data".to_string()
+        Err(_) => "error in sending the get response to the server".to_string()
     }
 }
 
