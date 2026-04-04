@@ -5,7 +5,6 @@ export function UtilityView (){
   const location=useLocation();
   const buildings=location.state?.buildings;
 
-  console.log(buildings);
   return(
     <div className="buildings-panel">
       {

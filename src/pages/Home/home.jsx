@@ -1,16 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GetBuildings } from '../../services/getBuilding'
 import { UtilityView } from '../../pages/utility/utility'
 // a function to get the buildings
-let fetchBuidings=({userName, password, buildings, setBuildings, navigate})=>{
+let fetchBuidings=async ({userName, password, buildings, navigate})=>{
   if (userName != "crosscompute" || password != "222003"){
     //return error 
     alert("wrong username or password");
   }
   else{
-    GetBuildings({setBuildings});
-    console.log(buildings);
     navigate('/utilityView', {state: {buildings} });
   }
 
@@ -20,7 +18,6 @@ function AdminLogin(props){
 
   const [userName, setUserName]= useState('');
   const [password, setPassword]= useState('');
-  const [buildings, setBuildings]=useState([]);
   const navigate=useNavigate();
   return(
     <>
@@ -44,7 +41,7 @@ function AdminLogin(props){
               </label>
               <button className="login-btn"
                 onClick={
-                  ()=> fetchBuidings({userName,password, buildings, setBuildings, navigate})
+                  ()=> fetchBuidings({userName, password, buildings: props.buildings, navigate})
                 }>Login</button>
           </div>
         )
@@ -54,14 +51,22 @@ function AdminLogin(props){
 }
 
 export const HomePanel=() =>{
+  const [buildings, setBuildings]=useState([]);
   const navigate=useNavigate();
   const [bldg_id, setBldg_id]=useState('');
   const [isOpen, setIsOpen]=useState(false);
+
+  useEffect(()=>{
+    async function fetchData(){
+       await GetBuildings({setBuildings});
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <button className="btn-utility" onClick={()=> setIsOpen(x => !x)}> Login as utility
       </button>
-      <AdminLogin isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <AdminLogin isOpen={isOpen} setIsOpen={setIsOpen} buildings={buildings}/>
       <div className="input-card">
             <label className="input-label">
                  <textarea className="bldg-id" value={bldg_id} onChange={(e)=> setBldg_id(e.target.value)} 
