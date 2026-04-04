@@ -11,12 +11,13 @@ function AdminLogin(props){
       {
         props.isOpen &&(
           <div className={`login-panel${props.isOpen?"-active": ""}`}>
-              <button className="cancel" onClick={()=> props.setIsOpen(x =>!x)}>cancel</button>
+              <button className="cancel-btn" onClick={()=> props.setIsOpen(x =>!x)}>cancel</button>
               <label> 
                 <textarea className="username-label" value={userName} onChange={(e)=> setUserName(e.target.value)} placeholder="username"/>
               </label>
               <label>
                 <textarea className="password-label" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="password"/>
+              <button className="login-btn" onClick={()=> console.log("login")}>Login</button>
               </label>
           </div>
         )
