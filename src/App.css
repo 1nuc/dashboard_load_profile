@@ -42,7 +42,7 @@ body {
   height: 100% !important;
   width: 100% !important;
 }
-.bldg-id, .username-label, .password-label{
+.bldg-id, .username-label, .password-label, .bldg-search {
   font-size:24px;
   border-radius: 20px;
   background-color: #DCE4E6;
