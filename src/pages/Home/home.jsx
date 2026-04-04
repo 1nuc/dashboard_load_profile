@@ -1,11 +1,23 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { GetBuildings } from '../../services/getBuilding'
+// a function to get the buildings
+let FetchBuidings=(props, setBuildings)=>{
+  if (props.userName != "crosscompute" || props.password != "222003"){
+    //return error 
+    alert("wrong username or password");
+  }
+  else{
+    GetBuildings();
+  }
 
+}
 // a pop up login function for the utility login 
 function AdminLogin(props){
 
   const [userName, setUserName]= useState('');
   const [password, setPassword]= useState('');
+  const [buildings, setBuildings]=useState("");
   return(
     <>
       {
@@ -13,11 +25,22 @@ function AdminLogin(props){
           <div className={`login-panel${props.isOpen?"-active": ""}`}>
               <button className="cancel-btn" onClick={()=> props.setIsOpen(x =>!x)}>cancel</button>
               <label> 
-                <textarea className="username-label" value={userName} onChange={(e)=> setUserName(e.target.value)} placeholder="username"/>
+                <textarea className="username-label" 
+                value={userName} 
+                onChange={
+                  (e)=> setUserName(e.target.value)
+                } placeholder="username"/>
               </label>
               <label>
-                <textarea className="password-label" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="password"/>
-              <button className="login-btn" onClick={()=> console.log("login")}>Login</button>
+                <textarea className="password-label"
+                value={password}
+                onChange={
+                  (e)=> setPassword(e.target.value)
+                } placeholder="password"/>
+              <button className="login-btn"
+                onClick={
+                  ()=> FetchBuidings({userName,password, setBuildings})
+                }>Login</button>
               </label>
           </div>
         )
