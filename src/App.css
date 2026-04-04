@@ -21,9 +21,9 @@ body {
   min-height: 100vh;
   background-color: #EDF5F5;
   background-image:
-  radial-gradient(circle at 90% -5%, #B8E0E0 0%, transparent 45%),
-  radial-gradient(circle at 10% 110%, #C5EBEB 0%, transparent 45%),
-  radial-gradient(circle at 50% 50%, #A0D4D4 0%, transparent 35%);
+  radial-gradient(circle at 90% -5%, #B8E0E0  0%, transparent 45%),
+  radial-gradient(circle at 10% 110%, #19194F 0%, transparent 45%),
+  radial-gradient(circle at 50% 50%, #8DC2AC 0%, transparent 35%);
 }
 
 .dashboard {
@@ -43,7 +43,6 @@ body {
   width: 100% !important;
 }
 .bldg-id{
-  color: #ffffff;
   font-size:24px;
   border-radius: 20px;
   background-color: #DCE4E6;
@@ -51,6 +50,7 @@ body {
   display: flex;
   align-items: center;
   height: 100px;
+  margin: 2px 2px 35px;
   width: 30vw;
   text-align: center;
   resize: none;
