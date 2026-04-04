@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './utility.css'
+
+
 export function UtilityView (){
   const location=useLocation();
   const buildings=location.state?.buildings;
   const [searched, setSearched]=useState([]);
   const [searchValue, setSearchValue]=useState("");
+  const navigate=useNavigate();
 
   useEffect(()=>{
 
@@ -30,7 +33,7 @@ export function UtilityView (){
       {
         <ul className="building-view">
           {searched.map((bldg, index) => (
-            <li key= {index} className="bldg-view"> {bldg} </li>
+            <li key= {index} className="bldg-view" onClick={()=>navigate('/dashboard')}> {bldg} </li>
           ))
           }
         </ul>
