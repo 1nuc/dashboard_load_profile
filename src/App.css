@@ -2,10 +2,13 @@
   flex: 1 1 400px;
   height: 400px;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   background: white;
   box-sizing: border-box;
+}
+.line-card, .area-card, .pie-card, .bar-card, .doughnut-card, .multitype-card:hover {
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
 }
 
 body {
@@ -15,13 +18,18 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: sans-serif;
+  min-height: 100vh;
+  background-color: #EDF5F5;
+  background-image:
+  radial-gradient(circle at 90% -5%, #B8E0E0 0%, transparent 45%),
+  radial-gradient(circle at 10% 110%, #C5EBEB 0%, transparent 45%),
+  radial-gradient(circle at 50% 50%, #A0D4D4 0%, transparent 35%);
 }
 
 .dashboard {
-  height: 100vh;
+  height: 100%;
   flex: 1;
   overflow-y: auto;
-  background-color: #EDF5F5;
   display:flex ;
   flex-wrap: wrap;
   align-content: flex-start;
