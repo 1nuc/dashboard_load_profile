@@ -31,8 +31,8 @@ async fn get_data(Path(bldg_id): Path<String>) -> String{
         .send().await;
     match res{
         Ok(msg) => {
-            // msg.json::<Data>().await.unwrap().data
-            msg.text().await.unwrap()
+            msg.json::<Data>().await.unwrap().data
+
         } 
         Err(_) => "error in sending the get response to the server".to_string()
     }

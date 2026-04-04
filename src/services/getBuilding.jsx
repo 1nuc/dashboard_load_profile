@@ -7,10 +7,8 @@ export const GetBuildings=async ()=>{
       throw new Error("error in getting the resopnse");
     }
     else{
-      response.then((data)=> data.json())
-      .then((data)=> {
-        console.log(data);
-      });
+      const data= await response.json();
+      console.log(data);
     }
   } 
   catch (err){
