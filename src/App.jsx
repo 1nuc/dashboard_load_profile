@@ -8,7 +8,7 @@ import { HomePanel } from './pages/Home/home'
 function App() {
   return (
       <BrowserRouter>
-          <button className="btn-utility"> Log in as utility
+          <button className="btn-utility"> Login as utility
           </button>
           <Routes>
               <Route path='/dashboard' element={ <Dashboard/>}/>
