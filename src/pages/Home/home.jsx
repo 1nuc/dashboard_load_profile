@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GetBuildings } from '../../services/getBuilding'
+import { UtilityView } from '../../pages/utility/utility'
 // a function to get the buildings
 let FetchBuidings=(props, setBuildings)=>{
   if (props.userName != "crosscompute" || props.password != "222003"){
@@ -8,7 +9,12 @@ let FetchBuidings=(props, setBuildings)=>{
     alert("wrong username or password");
   }
   else{
-    GetBuildings();
+    GetBuildings({setBuildings});
+    return (
+      <>
+        <UtilityView buildings={props.buildings}/>
+      </>
+    )
   }
 
 }
@@ -39,7 +45,7 @@ function AdminLogin(props){
                 } placeholder="password"/>
               <button className="login-btn"
                 onClick={
-                  ()=> FetchBuidings({userName,password, setBuildings})
+                  ()=> FetchBuidings({userName,password, buildings, setBuildings})
                 }>Login</button>
               </label>
           </div>

@@ -1,5 +1,5 @@
 
-export const GetBuildings=async ()=>{
+export const GetBuildings=async (props)=>{
   try{
 
     const response=await fetch("http://localhost:8080/bldg");
@@ -7,8 +7,7 @@ export const GetBuildings=async ()=>{
       throw new Error("error in getting the resopnse");
     }
     else{
-      const data= await response.json();
-      console.log(data);
+      props.setBuildings(response.json());
     }
   } 
   catch (err){
