@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import viteLogo from './assets/vite.svg';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes,useNavigate, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { UtilityView } from './pages/utility/utility'

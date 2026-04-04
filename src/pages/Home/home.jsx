@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { GetBuildings } from '../../services/getBuilding'
 import { UtilityView } from '../../pages/utility/utility'
 // a function to get the buildings
-let fetchBuidings=async ({userName, password, buildings, navigate})=>{
+let fetchBuidings=({userName, password, buildings, navigate})=>{
   if (userName != "crosscompute" || password != "222003"){
     //return error 
     alert("wrong username or password");
