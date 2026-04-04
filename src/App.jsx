@@ -3,12 +3,16 @@ import viteLogo from './assets/vite.svg';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { HomePanel } from './pages/Home/home'
 
 function App() {
   return (
       <BrowserRouter>
+          <button className="btn-utility"> Log in as utility
+          </button>
           <Routes>
               <Route path='/dashboard' element={ <Dashboard/>}/>
+              <Route path='/' element={ <HomePanel/>}/>
           </Routes>
       </BrowserRouter>
   )

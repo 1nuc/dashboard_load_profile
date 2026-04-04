@@ -24,7 +24,6 @@ body {
   radial-gradient(circle at 90% -5%, #B8E0E0 0%, transparent 45%),
   radial-gradient(circle at 10% 110%, #C5EBEB 0%, transparent 45%),
   radial-gradient(circle at 50% 50%, #A0D4D4 0%, transparent 35%);
-
 }
 
 .dashboard {
@@ -42,4 +41,36 @@ body {
 .line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas, .doughnut-card canvas, .multitype-card canvas {
   height: 100% !important;
   width: 100% !important;
+}
+.bldg-id{
+  color: #ffffff;
+  font-size:24px;
+  border-radius: 20px;
+  background-color: #DCE4E6;
+  border: 0;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 30vw;
+  text-align: center;
+  resize: none;
+  color: black;
+}
+.input-card{
+  height: 150px;
+  background-color: #EDF5F5;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.btn-utility{
+  position: fixed;
+  top: 4%;
+  left: 90%;
+  transform: translate(-50%, -50%);
 }
