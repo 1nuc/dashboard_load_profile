@@ -7,7 +7,7 @@
   background: white;
   box-sizing: border-box;
 }
-.line-card, .area-card, .pie-card, .bar-card, .doughnut-card, .multitype-card:hover {
+.line-card:hover, .area-card:hover, .pie-card:hover, .bar-card:hover, .doughnut-card:hover, .multitype-card:hover {
   box-shadow: 0 6px 25px rgba(0,0,0,0.1);
 }
 
@@ -42,7 +42,7 @@ body {
   height: 100% !important;
   width: 100% !important;
 }
-.bldg-id{
+.bldg-id, .username-label, .password-label{
   font-size:24px;
   border-radius: 20px;
   background-color: #DCE4E6;
@@ -68,7 +68,17 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.btn-utility{
+.login-panel-active {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 100;
+  width: 100vw;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0);
+}
+.btn-utility, .cancel{
   position: fixed;
   top: 4%;
   left: 90%;
