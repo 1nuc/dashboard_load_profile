@@ -3,18 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { GetBuildings } from '../../services/getBuilding'
 import { UtilityView } from '../../pages/utility/utility'
 // a function to get the buildings
-let FetchBuidings=(props, setBuildings)=>{
-  if (props.userName != "crosscompute" || props.password != "222003"){
+let fetchBuidings=({userName, password, buildings, setBuildings, navigate})=>{
+  if (userName != "crosscompute" || password != "222003"){
     //return error 
     alert("wrong username or password");
   }
   else{
     GetBuildings({setBuildings});
-    return (
-      <>
-        <UtilityView buildings={props.buildings}/>
-      </>
-    )
+    console.log(buildings);
+    navigate('/utilityView', {state: {buildings} });
   }
 
 }
@@ -23,7 +20,8 @@ function AdminLogin(props){
 
   const [userName, setUserName]= useState('');
   const [password, setPassword]= useState('');
-  const [buildings, setBuildings]=useState("");
+  const [buildings, setBuildings]=useState([]);
+  const navigate=useNavigate();
   return(
     <>
       {
@@ -43,11 +41,11 @@ function AdminLogin(props){
                 onChange={
                   (e)=> setPassword(e.target.value)
                 } placeholder="password"/>
+              </label>
               <button className="login-btn"
                 onClick={
-                  ()=> FetchBuidings({userName,password, buildings, setBuildings})
+                  ()=> fetchBuidings({userName,password, buildings, setBuildings, navigate})
                 }>Login</button>
-              </label>
           </div>
         )
       }
