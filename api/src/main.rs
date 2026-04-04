@@ -1,7 +1,5 @@
-use std::collections::HashMap;
-
 use axum::{Router, extract::Path, http::HeaderValue, routing::get, serve};
-use reqwest::{Method, header::{ACCEPT, AUTHORIZATION}};
+use reqwest::{Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}};
 use tokio::net::TcpListener;
 use serde::Deserialize;
 use tower_http::cors::{CorsLayer};
@@ -9,9 +7,9 @@ use tower_http::cors::{CorsLayer};
 async fn main() {
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();
     let app=Router::new()
-        .layer(cors())
         .route("/bldg", get(get_buildings))
-        .route("/predictions/{bldg_id}", get(get_data));
+        .route("/predictions/{bldg_id}", get(get_data))
+        .layer(cors());
     serve(addrs, app).await.unwrap();
 }
 
@@ -19,7 +17,7 @@ fn cors()-> CorsLayer{
     CorsLayer::new()
         .allow_origin("http://localhost:5173".parse::<HeaderValue>().unwrap())
         .allow_methods([Method::GET])
-        .allow_headers([ACCEPT,AUTHORIZATION])
+        .allow_headers([ACCEPT,AUTHORIZATION, CONTENT_TYPE])
 }
 
 #[derive(Deserialize)]
