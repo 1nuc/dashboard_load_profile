@@ -50,6 +50,15 @@ function AdminLogin(props){
   )
 }
 
+function checkBuilding(props){
+  if (!props.buildings.includes(props.bldg_id)){
+    alert(`${props.bldg_id} building does not exist`);
+  }
+  else{
+    props.navigate('/dashboard', { state: {building: props.bldg_id} });
+  }
+}
+
 export const HomePanel=() =>{
   const [buildings, setBuildings]=useState([]);
   const navigate=useNavigate();
@@ -72,7 +81,7 @@ export const HomePanel=() =>{
                  <textarea className="bldg-id" value={bldg_id} onChange={(e)=> setBldg_id(e.target.value)} 
         placeholder='Enter your building ID, ex. 171237'/>
             </label>
-            <button onClick={()=>navigate('/dashboard')}> Search </button>
+            <button onClick={()=>checkBuilding({buildings, bldg_id, navigate})}> Search </button>
       </div>
     </>
   )
