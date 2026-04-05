@@ -31,7 +31,7 @@ async fn get_data(Path(bldg_id): Path<String>) -> String{
         .send().await;
     match res{
         Ok(msg) => {
-            msg.json::<Data>().await.unwrap().data
+            msg.text().await.unwrap()
 
         } 
         Err(_) => "error in sending the get response to the server".to_string()
@@ -43,8 +43,6 @@ async fn get_buildings() -> String{
     let res=client.get("http://localhost:8000/buildings").send().await;
     match res{
         Ok(msg) => {
-            // msg.json::<Data>().await.unwrap().data
-            println!("{:?}", msg.headers());
             msg.text().await.unwrap()
         } 
         Err(_) => "error in sending the get response to the server".to_string()
