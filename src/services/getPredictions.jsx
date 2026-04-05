@@ -1,14 +1,14 @@
-export const GetPredictions=async ({setData, building})=>{
+export const GetPredictions=async ({setData, building, setIsLoading})=>{
   try{
-    console.log(building);
+    setIsLoading(true);
     const response=await fetch(`http://localhost:8080/predictions/${building}`);
-    console.log(response.json);
     if (!response.ok){
       throw new Error("error in getting the resopnse");
     }
     else{
       let data=await response.json();
       setData(data);
+      setIsLoading(false);
     }
   } 
   catch (err){

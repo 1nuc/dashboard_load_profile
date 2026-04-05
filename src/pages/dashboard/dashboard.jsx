@@ -9,18 +9,28 @@ import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
-  const [data, setData]=useState([]);
+  const [data, setData]=useState([{}]);
   const globalState=useLocation();
   const building= globalState.state?.building;
+  const [isLoading, setIsLoading]=useState(false);
 
   useEffect(()=>{
     async function fetchData(){
-      await GetPredictions({setData, building});
+      await GetPredictions({setData, building, setIsLoading});
     }
     fetchData();
-  },building);
+  },[building]);
   return (
     <>
+      {
+        isLoading &&(
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+            <p>Loading..</p>
+          </div>
+        )
+
+      }
           <Sidebar/>
       <div className= "dashboard">
           <LinePlot/>

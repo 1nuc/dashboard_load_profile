@@ -1,4 +1,4 @@
-use axum::{Router, extract::Path, http::HeaderValue, routing::get, serve};
+use axum::{Router, extract::Path, http::HeaderValue, response::IntoResponse, routing::get, serve};
 use reqwest::{Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}};
 use tokio::net::TcpListener;
 use serde::Deserialize;
@@ -25,14 +25,13 @@ struct Data{
     data: String,
 }
 
-async fn get_data(Path(bldg_id): Path<String>) -> String{
+async fn get_data(Path(bldg_id): Path<String>) -> impl IntoResponse{
     let client=reqwest::Client::new();
     let res=client.get(format!("http://localhost:8000/predictions/{bldg_id}"))
         .send().await;
     match res{
         Ok(msg) => {
             msg.text().await.unwrap()
-
         } 
         Err(_) => "error in sending the get response to the server".to_string()
     }
