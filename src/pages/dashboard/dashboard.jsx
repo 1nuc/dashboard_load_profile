@@ -20,14 +20,12 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
-  console.log(data);
   return (
     <>
       {
         isLoading &&(
           <div className="loading-spinner">
             <div className="spinner"></div>
-            <p>Loading..</p>
           </div>
         )
 
