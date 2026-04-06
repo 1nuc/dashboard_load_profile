@@ -11,7 +11,7 @@ export function UtilityView (){
   const navigate=useNavigate();
 
   useEffect(()=>{
-
+    //only take the first 10 buildings to be displayed
     setSearched(buildings.slice(0,10));
   },[])
   
@@ -33,7 +33,7 @@ export function UtilityView (){
       {
         <ul className="building-view">
           {searched.map((bldg, index) => (
-            <li key= {index} className="bldg-view" onClick={()=>navigate('/dashboard')}> {bldg} </li>
+            <li key= {index} className="bldg-view" onClick={()=>navigate('/dashboard', {state: {building: bldg}})}> {bldg} </li>
           ))
           }
         </ul>
