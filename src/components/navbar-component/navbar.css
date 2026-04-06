@@ -1,0 +1,21 @@
+.nav{
+  position: fixed;
+  display: flex;
+  top: 20px;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(100px);
+  height: auto;
+  width: 60%;
+}
+ul {
+  list-style-type: none;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+}
+.nav li {
+  padding: 20px;
+  color: black;
+}

@@ -32,7 +32,7 @@ body {
   overflow-y: auto;
   display:flex ;
   flex-wrap: wrap;
-  align-content: flex-start;
+  align-content: flex-end;
   gap: 24px;
   padding: 24px;
   box-sizing: border-box;

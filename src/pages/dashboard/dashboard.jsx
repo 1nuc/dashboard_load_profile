@@ -3,7 +3,7 @@ import { AreaPlot } from '../../components/plots-component/areachart'
 import { PiePlot } from '../../components/plots-component/piechart'
 import { BarPlot} from '../../components/plots-component/barchart'
 import { DougnutPlot } from '../../components/plots-component/doughnut'
-import Sidebar from '../../components/sidebar-component/sidebar'
+import Navbar from '../../components/navbar-component/navbar'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
@@ -30,7 +30,7 @@ export const Dashboard=()=>{
         )
 
       }
-          <Sidebar/>
+      <Navbar/>
       <div className= "dashboard">
           <LinePlot/>
           <AreaPlot/>
