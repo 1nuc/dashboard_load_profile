@@ -20,6 +20,7 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
+  console.log(data);
   return (
     <>
       {
