@@ -23,6 +23,19 @@ export default function Navbar(){
               </li> 
         ))}
           </ul>
+
+      <div className="dropdown"> 
+        <label>
+          Order By
+          <select> 
+            <option value="hour">hour </option>
+            <option value="day">day </option>
+            <option value="week">week </option>
+            <option value="month">month </option>
+            <option value="year">year </option>
+          </select>
+        </label>
+      </div>
     </nav>
   )
 }

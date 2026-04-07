@@ -24,7 +24,6 @@
   justify-content: center;
   gap: 4px;
   background: rgba(255, 255, 255, 0.25);
-  border-radius: 100px;
   border: 0.5px solid rgba(255, 255, 255, 0.5);
 }
 .nav li a{
@@ -42,4 +41,18 @@
   color: #8DC2AC;
   background: #19194F;
   border-radius: 30px;
+}
+.dropdown{
+  display: flex;
+  border-radius: 100px;
+  background: rgba(255,255,255);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  color: #19194f;
+  width: 200px;
+}
+.dropdown select{
+  background: rgba(255,255,255);
+  color: #19194f;
+  display: flex;
+  align-items: flex-end;
 }
