@@ -4,19 +4,15 @@ import { useRef, useEffect } from 'react'
 export function LinearPlot({data}){
   const linearRef=useRef();
   useEffect(()=>{
-    if (!data || data.length===0 || !data.timestamp) return;
-    const formatted_data=data.timestamp?.map((t, i)=>({
-      timestamp: new Date(t),
-      heating: data.heating?.[i],
-    }));
-    console.log(formatted_data);
+    console.log(data);
+    if (!data || data.length===0) return;
     const Lineplot=Plot.plot({
       height: 200,
       width: 1200,
       marks: [
-        Plot.lineY(formatted_data,{
+        Plot.lineY(data,{
           x: "timestamp",
-          y: "heating",
+          y: "AC",
           interval: "day",
           stroke: "red",
         })

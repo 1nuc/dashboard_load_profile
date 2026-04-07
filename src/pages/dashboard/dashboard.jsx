@@ -23,7 +23,7 @@ export const Dashboard=()=>{
     fetchData();
   },[building]);
   // convert the datetime 
-  data.timestamp=data.timestamp?.map(d=> new Date(d));
+  let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   return (
     <>
       {
@@ -40,7 +40,7 @@ export const Dashboard=()=>{
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <LinearPlot data= {data}/>
+          <LinearPlot data= {Data}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>
