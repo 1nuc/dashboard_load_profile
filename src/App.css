@@ -38,7 +38,7 @@ body {
   box-sizing: border-box;
 }
 
-.line-card canvas, .bar-card canvas, .pie-card canvas, .area-card canvas, .doughnut-card canvas, .multitype-card canvas {
+.line-card svg, .bar-card canvas, .pie-card canvas, .area-card canvas, .doughnut-card canvas, .multitype-card canvas {
   height: 100% !important;
   width: 100% !important;
 }

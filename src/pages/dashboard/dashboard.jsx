@@ -1,4 +1,4 @@
-import { LinePlot } from '../../components/plots-component/lineplot'
+import { LinearPlot } from '../../components/plots-component/lineplot'
 import { AreaPlot } from '../../components/plots-component/areachart'
 import { PiePlot } from '../../components/plots-component/piechart'
 import { BarPlot} from '../../components/plots-component/barchart'
@@ -8,28 +8,10 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
 
-const Linearplot= ({data}) => {
-  const Data={
-    labels:data.timestamp,
-    datasets: [
-      {
-        label:"AC",
-        data:data.AC,
-        borderColor: "rgb(75, 192, 192)"
-      },
-    ],
-  };
-  return (
-    <>
-          <LinePlot Data={Data}/>
-    </>
-  )
-
-}
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
-  const [data, setData]=useState([{}]);
+  const [data, setData]=useState([]);
   const globalState=useLocation();
   const building= globalState.state?.building;
   const [isLoading, setIsLoading]=useState(false);
@@ -40,7 +22,8 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
-  console.log(data);
+  // convert the datetime 
+  data.timestamp=data.timestamp?.map(d=> new Date(d));
   return (
     <>
       {
@@ -57,7 +40,7 @@ export const Dashboard=()=>{
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <Linearplot data= {data}/>
+          <LinearPlot data= {data}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>
