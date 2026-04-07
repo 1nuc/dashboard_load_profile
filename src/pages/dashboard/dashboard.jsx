@@ -7,6 +7,26 @@ import Navbar from '../../components/navbar-component/navbar'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
+
+const Linearplot= ({data}) => {
+  const Data={
+    labels:data.timestamp,
+    datasets: [
+      {
+        label:"AC",
+        data:data.AC,
+        borderColor: "rgb(75, 192, 192)"
+      },
+    ],
+  };
+  return (
+    <>
+          <LinePlot Data={Data}/>
+    </>
+  )
+
+}
+
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([{}]);
@@ -20,6 +40,7 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
+  console.log(data);
   return (
     <>
       {
@@ -32,11 +53,11 @@ export const Dashboard=()=>{
       }
       <Navbar/>
       <div className= "dashboard">
-          <LinePlot/>
           <AreaPlot/>
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
+          <Linearplot data= {data}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>

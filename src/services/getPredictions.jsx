@@ -7,7 +7,7 @@ export const GetPredictions=async ({setData, building, setIsLoading})=>{
     }
     else{
       let data=await response.json();
-      setData(data);
+      setData(data[0]);
       setIsLoading(false);
     }
   } 

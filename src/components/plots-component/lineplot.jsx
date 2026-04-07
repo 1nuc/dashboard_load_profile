@@ -1,6 +1,5 @@
 import { Line } from "react-chartjs-2";
-import 'chart.js/auto'
-import { Data } from "../dataset/dataset";
+import 'chart.js/auto';
 
 export const LinePlot = (props)=>{
   const options= {
@@ -8,7 +7,7 @@ export const LinePlot = (props)=>{
   }
   return ( 
     <div className="line-card">
-      <Line options={options} data={Data}/>
+      <Line options={options} data={props.Data}/>
     </div>
   )
 
