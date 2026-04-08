@@ -46,20 +46,37 @@
   background: #19194F;
   border-radius: 30px;
 }
+
 .dropdown:hover{
   border-color: rgba(25, 25, 79, 0.4);
   box-shadow: 0 0 0 3px rgba(25, 25, 79, 0.07);
   border-radius: 10px;
 }
+.time-selectors{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .dropdown{
   height: 40px;
   display: flex;
-  position: relative;
   align-self: center;
+  margin-right: 90px;
   width: 250px;
   background: rgba(255, 255, 255, 0.25);
   border: 0.5px solid rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+}
+.time-range{
+  display: block;
+  justify-content: center;
+}
+.apply {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  background: #8DC2AC;
+  color: #19194f;
 }
 .dropdown_feild{
   position: relative;

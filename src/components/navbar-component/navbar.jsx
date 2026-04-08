@@ -25,27 +25,30 @@ export default function Navbar({temporal, setTemporal}){
         ))}
           </ul>
       </div>
-      <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
-      <div className="time-range"> 
-        <input type="datetime-local" className="start-date"></input>
-          <span> > </span>
-        <input type="datetime-local" className="end-date"></input>
-      </div>
-        <label>
-          <textarea className="dropdown_feild" value={`Group By${temporal? ` :${temporal}` :""}`}
-            placeholder="OrderBy" onClick={()=> setTemporal(null)} readOnly>
-          </textarea>
-        </label>
-            {visible &&(
-            <ul>
-                <li onClick={()=> setTemporal("year")}> Year </li>
-                <li onClick={()=> setTemporal("quarter")}> Quarter </li>
-                <li onClick={()=> setTemporal("month")}> Month </li>
-                <li onClick={()=> setTemporal("week")}> Week </li>
-                <li onClick={()=> setTemporal("day")}> Day </li>
-                <li onClick={()=> setTemporal("hour")}> Hour </li>
-             </ul> 
-              )}
+      <div className="time-selectors">
+        <div className="time-range"> 
+          <input type="datetime-local" className="start-date"></input>
+            <span> > </span>
+          <input type="datetime-local" className="end-date"></input>
+          <button className="apply"> apply </button>
+        </div>
+        <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
+          <label>
+            <textarea className="dropdown_feild" value={`Group By${temporal? ` :${temporal}` :""}`}
+              placeholder="OrderBy" onClick={()=> setTemporal(null)} readOnly>
+            </textarea>
+          </label>
+              {visible &&(
+              <ul>
+                  <li onClick={()=> setTemporal("year")}> Year </li>
+                  <li onClick={()=> setTemporal("quarter")}> Quarter </li>
+                  <li onClick={()=> setTemporal("month")}> Month </li>
+                  <li onClick={()=> setTemporal("week")}> Week </li>
+                  <li onClick={()=> setTemporal("day")}> Day </li>
+                  <li onClick={()=> setTemporal("hour")}> Hour </li>
+               </ul> 
+                )}
+        </div>
       </div>
     </nav>
   )
