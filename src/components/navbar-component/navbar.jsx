@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import './navbar.css'
 
-export default function Navbar(){
+export default function Navbar({temporal}){
   const [active, setActive] =useState(true);
+  const [visible, setVisible] =useState(false);
   const sidebar_elements = [
     { id: 1, panel: "home" },
     { id: 2, panel: "dashboard" },
@@ -26,14 +27,19 @@ export default function Navbar(){
 
       <div className="dropdown"> 
         <label>
-          <select value=" ">
-            <option value="hour">hour </option>
-            <option value="day">day </option>
-            <option value="week">week </option>
-            <option value="month">month </option>
-            <option value="quarter">quarter </option>
-            <option value="year">year </option>
-          </select>
+          <textarea className="dropdown_feild" value= {temporal} placeholder="OrderBy" onFocus={()=> setVisible(x=>!x)}>
+          </textarea>
+            {visible &&(
+            <ul>
+                <li> year </li>
+                <li> quarter</li>
+                <li> month</li>
+                <li> week</li>
+                <li> day</li>
+                <li> hour</li>
+                <li> minute</li>
+             </ul> 
+              )}
         </label>
       </div>
     </nav>

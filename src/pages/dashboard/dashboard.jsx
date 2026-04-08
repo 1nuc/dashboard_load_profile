@@ -15,6 +15,7 @@ export const Dashboard=()=>{
   const globalState=useLocation();
   const building= globalState.state?.building;
   const [isLoading, setIsLoading]=useState(false);
+  const [temporal, setTemporal]=useState(null);
 
   useEffect(()=>{
     async function fetchData(){
