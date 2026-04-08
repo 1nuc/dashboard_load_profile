@@ -45,14 +45,31 @@
 .dropdown{
   display: flex;
   border-radius: 100px;
-  background: rgba(255,255,255);
+  margin-left: 50px;
+  background: rgba(255, 255, 255, 0.25);
   border: 0.5px solid rgba(255, 255, 255, 0.5);
-  color: #19194f;
-  width: 200px;
 }
 .dropdown select{
-  background: rgba(255,255,255);
+  background: none;
+  appearance: none;
+  -webkit-appearance: none;
   color: #19194f;
   display: flex;
-  align-items: flex-end;
+  width: 180px;
+  height: 60px;
+  border-radius: 50px;
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  font-size: 26px;
+  cursor: pointer;
+  text-align: center;
+}
+.dropdown:hover{
+  border-color: rgba(25, 25, 79, 0.4);
+  box-shadow: 0 0 0 3px rgba(25, 25, 79, 0.07);
+  border-radius: 30px;
+}
+.dropdown select option {
+  color: #19194f;
+  cursor: pointer;
+  padding: 10px;
 }

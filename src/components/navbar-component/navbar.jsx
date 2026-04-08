@@ -26,12 +26,12 @@ export default function Navbar(){
 
       <div className="dropdown"> 
         <label>
-          Order By
-          <select> 
+          <select value=" ">
             <option value="hour">hour </option>
             <option value="day">day </option>
             <option value="week">week </option>
             <option value="month">month </option>
+            <option value="quarter">quarter </option>
             <option value="year">year </option>
           </select>
         </label>
