@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import './navbar.css'
 
-export default function Navbar({temporal}){
+export default function Navbar({temporal, setTemporal}){
   const [active, setActive] =useState(true);
   const [visible, setVisible] =useState(false);
   const sidebar_elements = [
@@ -13,7 +13,7 @@ export default function Navbar({temporal}){
   ];
 
   return(
-    <nav className="nav"> 
+    <nav className="nav" onMouseLeave={()=> setVisible(false)}> 
       <div className="Header"> <h2> Load Profile Decomposition Dashboard </h2> </div>
           <ul>
               {sidebar_elements.map((item) =>( 
@@ -25,22 +25,23 @@ export default function Navbar({temporal}){
         ))}
           </ul>
 
-      <div className="dropdown"> 
+      <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
         <label>
-          <textarea className="dropdown_feild" value= {temporal} placeholder="OrderBy" onFocus={()=> setVisible(x=>!x)}>
+          <textarea className="dropdown_feild" value= {temporal}
+            placeholder="OrderBy" readOnly>
           </textarea>
+        </label>
             {visible &&(
             <ul>
-                <li> year </li>
-                <li> quarter</li>
-                <li> month</li>
-                <li> week</li>
-                <li> day</li>
-                <li> hour</li>
-                <li> minute</li>
+                <li onClick={()=> setTemporal("year")}> Year </li>
+                <li onClick={()=> setTemporal("quarter")}> Quarter </li>
+                <li onClick={()=> setTemporal("month")}> Month </li>
+                <li onClick={()=> setTemporal("week")}> Week </li>
+                <li onClick={()=> setTemporal("day")}> Day </li>
+                <li onClick={()=> setTemporal("hour")}> Hour </li>
+                <li onClick={()=> setTemporal("minute")}> Minute </li>
              </ul> 
               )}
-        </label>
       </div>
     </nav>
   )
