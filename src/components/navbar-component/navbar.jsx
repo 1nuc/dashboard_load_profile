@@ -27,8 +27,8 @@ export default function Navbar({temporal, setTemporal}){
 
       <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
         <label>
-          <textarea className="dropdown_feild" value= {temporal}
-            placeholder="OrderBy" readOnly>
+          <textarea className="dropdown_feild" value={`Order By${temporal? ` :${temporal}` :""}`}
+            placeholder="OrderBy" onClick={()=> setTemporal(null)}>
           </textarea>
         </label>
             {visible &&(

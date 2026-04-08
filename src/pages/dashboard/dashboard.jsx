@@ -35,7 +35,7 @@ export const Dashboard=()=>{
         )
 
       }
-      <Navbar/>
+      <Navbar temporal={temporal} setTemporal={setTemporal}/>
       <div className= "dashboard">
           <AreaPlot/>
           <PiePlot/>
