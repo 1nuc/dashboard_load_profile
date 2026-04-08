@@ -17,6 +17,7 @@ export const Dashboard=()=>{
   const [isLoading, setIsLoading]=useState(false);
   const [temporal, setTemporal]=useState(null);
 
+  console.log(building);
   useEffect(()=>{
     async function fetchData(){
       await GetPredictions({setData, building, setIsLoading});

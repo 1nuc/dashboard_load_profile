@@ -13,6 +13,7 @@ function App() {
               <Route path='/dashboard' element={ <Dashboard/>}/>
               <Route path='/utilityView' element={ <UtilityView/>}/>
               <Route path='/' element={ <HomePanel/>}/>
+              <Route path='/Home' element={ <HomePanel/>}/>
           </Routes>
       </BrowserRouter>
   )

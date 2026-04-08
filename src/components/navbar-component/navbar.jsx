@@ -26,6 +26,11 @@ export default function Navbar({temporal, setTemporal}){
           </ul>
       </div>
       <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
+      <div className="time-range"> 
+        <input type="datetime-local" className="start-date"></input>
+          <span> > </span>
+        <input type="datetime-local" className="end-date"></input>
+      </div>
         <label>
           <textarea className="dropdown_feild" value={`Group By${temporal? ` :${temporal}` :""}`}
             placeholder="OrderBy" onClick={()=> setTemporal(null)} readOnly>
