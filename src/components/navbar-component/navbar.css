@@ -2,26 +2,30 @@
   position: fixed;
   display: flex;
   z-index: 1000;
-  justify-content: flex-start;
-  align-items: center;
   padding-left: 20px;
+  flex-direction: column;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.15);
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.35); 
-  height: 100px;
+  height: auto;
   width: 100%;
-  gap: 32px;
 }
-.nav h2 {
+.Header{
+  display: flex;
+  align-items: center;
+  height: 60px;
+  justify-content: center;
+}
+.Header h2 {
   font-size: 26px;
   font-weight: bold;
   color: #19194f;
 }
 .nav ul {
   list-style-type: none;
+  margin-left: 10rem;
   border-radius: 100px;
   display: flex;
-  justify-content: center;
   gap: 4px;
   background: rgba(255, 255, 255, 0.25);
   border: 0.5px solid rgba(255, 255, 255, 0.5);
@@ -31,7 +35,7 @@
   padding: 20px;
   color: #19194f;
   border: 30px;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 500;
   border-radius: 100px;
   transition: background 0.18s, color 0.18s;
@@ -78,8 +82,8 @@
   height: 40px;
   position: fixed;
   border-radius: 10px;
-  right: 70px;
-  padding:10px;
+  right: 140px;
+  padding:20px;
   list-style: none;
   padding: 0px;
   cursor: pointer;

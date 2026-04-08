@@ -1,9 +1,8 @@
 import * as Plot from '@observablehq/plot';
 import { useRef, useEffect } from 'react'
 
-export function LinearPlot({data}){
+export function LinearPlot({data, temporal}){
   const linearRef=useRef();
-  console.log(data);
   const flatten_data=data.flatMap(d => [
     {"timestamp": d.timestamp, "value": d.AC, "device": "AC"},
     {"timestamp": d.timestamp, "value": d.heating, "device": "heating"},
@@ -23,7 +22,7 @@ export function LinearPlot({data}){
         Plot.lineY(flatten_data,{
           x: "timestamp",
           y: "value",
-          interval: "day",
+          interval:temporal || "year",
           stroke: "device",
         }),
       ],
@@ -32,7 +31,7 @@ export function LinearPlot({data}){
 
     linearRef.current.append(Lineplot);
     return ()=> Lineplot.remove();
-  },[data]);
+  },[data, temporal]);
 
   return (
     <div className="line-card" ref={linearRef}/>

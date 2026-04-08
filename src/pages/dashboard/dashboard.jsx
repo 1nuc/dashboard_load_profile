@@ -41,7 +41,7 @@ export const Dashboard=()=>{
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <LinearPlot data= {Data}/>
+          <LinearPlot data= {Data} temporal={temporal}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>

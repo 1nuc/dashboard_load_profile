@@ -14,7 +14,7 @@ export default function Navbar({temporal, setTemporal}){
 
   return(
     <nav className="nav" onMouseLeave={()=> setVisible(false)}> 
-      <div className="Header"> <h2> Load Profile Decomposition Dashboard </h2> </div>
+      <div className="Header"> <h2> Load Profile Decomposition Dashboard </h2>
           <ul>
               {sidebar_elements.map((item) =>( 
               <li key={item.id}>
@@ -24,11 +24,11 @@ export default function Navbar({temporal, setTemporal}){
               </li> 
         ))}
           </ul>
-
+      </div>
       <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
         <label>
-          <textarea className="dropdown_feild" value={`Order By${temporal? ` :${temporal}` :""}`}
-            placeholder="OrderBy" onClick={()=> setTemporal(null)}>
+          <textarea className="dropdown_feild" value={`Group By${temporal? ` :${temporal}` :""}`}
+            placeholder="OrderBy" onClick={()=> setTemporal(null)} readOnly>
           </textarea>
         </label>
             {visible &&(
@@ -39,7 +39,6 @@ export default function Navbar({temporal, setTemporal}){
                 <li onClick={()=> setTemporal("week")}> Week </li>
                 <li onClick={()=> setTemporal("day")}> Day </li>
                 <li onClick={()=> setTemporal("hour")}> Hour </li>
-                <li onClick={()=> setTemporal("minute")}> Minute </li>
              </ul> 
               )}
       </div>
