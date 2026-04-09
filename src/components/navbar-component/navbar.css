@@ -1,12 +1,11 @@
 .nav{
-  position: fixed;
   display: flex;
   padding-left: 20px;
   flex-direction: column;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.15);
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.35); 
-  height: 130px;
+  height: 110px;
   width: 100%;
 }
 .Header{
