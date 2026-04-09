@@ -4,6 +4,8 @@ import './navbar.css'
 
 export default function Navbar(props){
   const [active, setActive] =useState(true);
+  const [sDate, setSDate]=useState('');
+  const [eDate, setEDate]=useState('');
   const [visible, setVisible] =useState(false);
   const sidebar_elements = [
     { id: 1, panel: "home" },
@@ -34,8 +36,8 @@ export default function Navbar(props){
           <span> Start Date</span>
           <input type="datetime-local" 
             className="start-date" 
-            value={props.startDate} 
-            onChange={(e)=>props.setStartDate(e.target.value)}
+            value={sDate} 
+            onChange={(e)=>setSDate(e.target.value)}
             min={min}
             max={max}
           /> 
@@ -43,13 +45,16 @@ export default function Navbar(props){
           <span> End Date</span>
           <input type="datetime-local"
             className="end-date"
-            value={props.endDate}
-            onChange={(e)=>props.setEndDate(e.target.value)}
-            min={min}
+            value={eDate}
+            onChange={(e)=>setEDate(e.target.value)}
+            min={sDate}
             max={max}
           />
           
-          <button className="apply"> apply </button>
+          <button className="apply"
+            onClick={()=>{
+              props.setStartDate(sDate);
+              props.setEndDate(eDate)}}> apply </button>
         </div>
         <div className="dropdown" onMouseEnter={()=> setVisible(true)}> 
           <label>
