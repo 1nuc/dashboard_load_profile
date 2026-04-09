@@ -27,8 +27,10 @@ export default function Navbar({temporal, setTemporal}){
       </div>
       <div className="time-selectors">
         <div className="time-range"> 
+          <span> Start Date</span>
           <input type="datetime-local" className="start-date"></input>
             <span> > </span>
+          <span> End Date</span>
           <input type="datetime-local" className="end-date"></input>
           <button className="apply"> apply </button>
         </div>

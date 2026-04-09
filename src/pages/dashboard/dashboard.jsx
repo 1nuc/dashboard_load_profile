@@ -24,6 +24,7 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
+  console.log(data);
   // convert the datetime 
   let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   return (
