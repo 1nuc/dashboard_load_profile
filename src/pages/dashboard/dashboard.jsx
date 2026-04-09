@@ -8,6 +8,17 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
 
+function flatten_data(data){
+  return data.flatMap(d => [
+    {"timestamp": d.timestamp, "value": d.AC, "device": "AC"},
+    {"timestamp": d.timestamp, "value": d.heating, "device": "heating"},
+    {"timestamp": d.timestamp, "value": d.television, "device": "television"},
+    {"timestamp": d.timestamp, "value": d.dishwasher, "device": "dishwasher"},
+    {"timestamp": d.timestamp, "value": d.ceiling_fan, "device": "ceiling_fan"},
+    {"timestamp": d.timestamp, "value": d.refrigerator, "device": "refrigerator"},
+    {"timestamp": d.timestamp, "value": d.clothes_washer, "device": "clothes_washer"},
+  ])
+}
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
@@ -45,7 +56,7 @@ export const Dashboard=()=>{
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <LinearPlot data= {Data} temporal={temporal}/>
+          <LinearPlot data= {(flatten_data(Data))} temporal={temporal}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>

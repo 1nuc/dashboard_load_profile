@@ -28,10 +28,10 @@ export default function Navbar(props){
       <div className="time-selectors">
         <div className="time-range"> 
           <span> Start Date</span>
-          <input type="datetime-local" className="start-date" value={props.startDate} onChange={()=>props.setStartDate(e.target.value)} /> 
+          <input type="datetime-local" className="start-date" value={props.startDate} onChange={(e)=>props.setStartDate(e.target.value)} /> 
             <span> &gt; </span>
           <span> End Date</span>
-          <input type="datetime-local" className="end-date" value={props.endDate} onChange={()=>props.setEndDate(e.target.value)}/>
+          <input type="datetime-local" className="end-date" value={props.endDate} onChange={(e)=>props.setEndDate(e.target.value)}/>
           
           <button className="apply"> apply </button>
         </div>
