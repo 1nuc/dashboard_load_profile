@@ -16,6 +16,8 @@ export const Dashboard=()=>{
   const building= globalState.state?.building;
   const [isLoading, setIsLoading]=useState(false);
   const [temporal, setTemporal]=useState(null);
+  const [startDate, setStartDate]=useState("");
+  const [endDate, setEndDate]=useState("");
 
   console.log(building);
   useEffect(()=>{
@@ -24,7 +26,6 @@ export const Dashboard=()=>{
     }
     fetchData();
   },[building]);
-  console.log(data);
   // convert the datetime 
   let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   return (
@@ -37,7 +38,8 @@ export const Dashboard=()=>{
         )
 
       }
-      <Navbar temporal={temporal} setTemporal={setTemporal}/>
+      <Navbar temporal={temporal} setTemporal={setTemporal} 
+        startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
       <div className= "dashboard">
           <AreaPlot/>
           <PiePlot/>
