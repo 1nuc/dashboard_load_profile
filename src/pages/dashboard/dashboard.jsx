@@ -28,7 +28,7 @@ export const Dashboard=()=>{
   let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   const dateTimeRange=Data.map(d=> d.timestamp);
   return (
-    <>
+    <div>
       {
         isLoading &&(
           <div className="loading-spinner">
@@ -47,6 +47,6 @@ export const Dashboard=()=>{
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           {/* <MultiTypePlot/> */}
       </div>
-    </>
+    </div>
   )
 }

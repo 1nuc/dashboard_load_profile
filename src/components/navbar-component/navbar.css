@@ -6,7 +6,6 @@
   background: rgba(255, 255, 255, 0.15);
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.35); 
   height: 110px;
-  width: 100%;
 }
 .Header{
   display: flex;
@@ -26,7 +25,7 @@
   gap: 4px;
   margin-left: 300px;
   background: rgba(255, 255, 255, 0.25);
-  height: 40px;
+  height: auto;
   border: 0.5px solid rgba(255, 255, 255, 0.5);
 }
 .nav li a{
@@ -59,6 +58,7 @@
   height: 40px;
   display: flex;
   align-self: center;
+  position: relative;
   margin-right: 90px;
   width: 250px;
   background: rgba(255, 255, 255, 0.25);
@@ -103,7 +103,9 @@
 ::-webkit-datetime-edit-fields-wrapper {
   cursor: pointer;
 }
-
+input[value=""]::-webkit-datetime-edit{
+  display: none;
+}
 .dropdown_feild{
   position: relative;
   border-radius: 10px;

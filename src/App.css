@@ -1,7 +1,6 @@
 .line-card, .area-card, .pie-card, .bar-card, .doughnut-card, .multitype-card {
-  flex: 1 1 400px;
-  height: auto;
   padding: 20px;
+  display: inline-flex;
   border-radius: 20px;
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   background: white;
@@ -25,24 +24,18 @@ body {
 }
 
 .dashboard {
-  height: 100%;
   flex: 1;
-  margin-top: 20px;
-  position: fixed;
-  height: 100%;
   overflow-y: auto;
+  overflow-x: auto;
   display:flex ;
   flex-wrap: wrap;
-  align-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
   gap: 24px;
   padding: 24px;
   box-sizing: border-box;
 }
 
-.line-card svg, .bar-card canvas, .pie-card canvas, .area-card canvas, .doughnut-card canvas, .multitype-card canvas {
-  height: 100% !important;
-  width: 100% !important;
-}
 .bldg-id, .username-label, .password-label{
   font-size:24px;
   border-radius: 20px;

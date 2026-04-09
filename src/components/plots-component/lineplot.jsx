@@ -17,8 +17,8 @@ export function LinearPlot({data, temporal, startDate, endDate}){
     const filtered_data= (!startDate || !endDate)? flatten_data :
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const Lineplot=Plot.plot({
-      height: 200,
-      width: 1200,
+      height: 300,
+      width: 1800,
       color: {legend: true},
       marks: [
         Plot.lineY(filtered_data,{
