@@ -11,6 +11,10 @@ export default function Navbar(props){
     { id: 3, panel: "report" },
     { id: 4, panel: "metrics" },
   ];
+  let min=new Date(Math.min(...props.dateTimeRange));
+  min=isNaN(min) ?'': min.toISOString().slice(0,16);
+  let max=new Date(Math.max(...props.dateTimeRange));
+  max=isNaN(max) ?'': max.toISOString().slice(0,16);
 // I will filter the data after I click apply good
   return(
     <nav className="nav" onMouseLeave={()=> setVisible(false)}> 
@@ -28,10 +32,22 @@ export default function Navbar(props){
       <div className="time-selectors">
         <div className="time-range"> 
           <span> Start Date</span>
-          <input type="datetime-local" className="start-date" value={props.startDate} onChange={(e)=>props.setStartDate(e.target.value)} /> 
+          <input type="datetime-local" 
+            className="start-date" 
+            value={props.startDate} 
+            onChange={(e)=>props.setStartDate(e.target.value)}
+            min={min}
+            max={max}
+          /> 
             <span> &gt; </span>
           <span> End Date</span>
-          <input type="datetime-local" className="end-date" value={props.endDate} onChange={(e)=>props.setEndDate(e.target.value)}/>
+          <input type="datetime-local"
+            className="end-date"
+            value={props.endDate}
+            onChange={(e)=>props.setEndDate(e.target.value)}
+            min={min}
+            max={max}
+          />
           
           <button className="apply"> apply </button>
         </div>

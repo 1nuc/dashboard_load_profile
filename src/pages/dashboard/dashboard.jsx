@@ -4,21 +4,9 @@ import { PiePlot } from '../../components/plots-component/piechart'
 import { BarPlot} from '../../components/plots-component/barchart'
 import { DougnutPlot } from '../../components/plots-component/doughnut'
 import Navbar from '../../components/navbar-component/navbar'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
-
-function flatten_data(data){
-  return data.flatMap(d => [
-    {"timestamp": d.timestamp, "value": d.AC, "device": "AC"},
-    {"timestamp": d.timestamp, "value": d.heating, "device": "heating"},
-    {"timestamp": d.timestamp, "value": d.television, "device": "television"},
-    {"timestamp": d.timestamp, "value": d.dishwasher, "device": "dishwasher"},
-    {"timestamp": d.timestamp, "value": d.ceiling_fan, "device": "ceiling_fan"},
-    {"timestamp": d.timestamp, "value": d.refrigerator, "device": "refrigerator"},
-    {"timestamp": d.timestamp, "value": d.clothes_washer, "device": "clothes_washer"},
-  ])
-}
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
@@ -30,7 +18,6 @@ export const Dashboard=()=>{
   const [startDate, setStartDate]=useState("");
   const [endDate, setEndDate]=useState("");
 
-  console.log(building);
   useEffect(()=>{
     async function fetchData(){
       await GetPredictions({setData, building, setIsLoading});
@@ -39,6 +26,7 @@ export const Dashboard=()=>{
   },[building]);
   // convert the datetime 
   let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
+  const dateTimeRange=Data.map(d=> d.timestamp);
   return (
     <>
       {
@@ -50,13 +38,13 @@ export const Dashboard=()=>{
 
       }
       <Navbar temporal={temporal} setTemporal={setTemporal} 
-        startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}/>
+        startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
           <AreaPlot/>
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <LinearPlot data= {(flatten_data(Data))} temporal={temporal}/>
+          <LinearPlot data= {Data} temporal={temporal}/>
           {/* <MultiTypePlot/> */}
       </div>
     </>
