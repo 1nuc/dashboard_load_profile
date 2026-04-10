@@ -40,11 +40,11 @@ export const Dashboard=()=>{
       <Navbar temporal={temporal} setTemporal={setTemporal} 
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
+          <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <AreaPlot/>
           <PiePlot/>
           <BarPlot/>
           <DougnutPlot/>
-          <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           {/* <MultiTypePlot/> */}
       </div>
     </div>
