@@ -45,6 +45,7 @@ export const Dashboard=()=>{
         </div>
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <div className="desc1"> Distribution of devices across time</div>
+          < KPI data={Data} startDate={startDate} endDate={endDate}/>
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <div className="desc1"> Distribution of devices across time</div>
           <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
