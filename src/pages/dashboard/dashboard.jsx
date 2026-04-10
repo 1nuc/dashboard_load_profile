@@ -1,12 +1,11 @@
 import { LinearPlot } from '../../components/plots-component/lineplot'
-import { PiePlot } from '../../components/plots-component/piechart'
 import { BarChart } from '../../components/plots-component/barchart'
-import { DougnutPlot } from '../../components/plots-component/doughnut'
 import Navbar from '../../components/navbar-component/navbar'
 import { useState, useEffect,useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
-import { HorBarChart } from '../../components/plots-component/HorizontalBarChart'
+import { HorBarChart } from '../../components/plots-component/PerformanceComparison'
+import { SumChart } from '../../components/plots-component/summaryPlot'
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([]);
@@ -41,9 +40,8 @@ export const Dashboard=()=>{
       <div className= "dashboard">
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
-          <PiePlot/>
-          <DougnutPlot/>
           {/* <MultiTypePlot/> */}
       </div>
     </div>
