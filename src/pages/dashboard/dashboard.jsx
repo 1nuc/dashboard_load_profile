@@ -1,7 +1,7 @@
 import { LinearPlot } from '../../components/plots-component/lineplot'
 import { AreaPlot } from '../../components/plots-component/areachart'
 import { PiePlot } from '../../components/plots-component/piechart'
-import { BarPlot} from '../../components/plots-component/barchart'
+import { BarChart } from '../../components/plots-component/barchart'
 import { DougnutPlot } from '../../components/plots-component/doughnut'
 import Navbar from '../../components/navbar-component/navbar'
 import { useState, useEffect,useMemo } from 'react'
@@ -41,9 +41,9 @@ export const Dashboard=()=>{
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
           <AreaPlot/>
           <PiePlot/>
-          <BarPlot/>
           <DougnutPlot/>
           {/* <MultiTypePlot/> */}
       </div>
