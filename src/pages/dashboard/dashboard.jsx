@@ -1,5 +1,4 @@
 import { LinearPlot } from '../../components/plots-component/lineplot'
-import { AreaPlot } from '../../components/plots-component/areachart'
 import { PiePlot } from '../../components/plots-component/piechart'
 import { BarChart } from '../../components/plots-component/barchart'
 import { DougnutPlot } from '../../components/plots-component/doughnut'
@@ -43,7 +42,6 @@ export const Dashboard=()=>{
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
-          <AreaPlot/>
           <PiePlot/>
           <DougnutPlot/>
           {/* <MultiTypePlot/> */}

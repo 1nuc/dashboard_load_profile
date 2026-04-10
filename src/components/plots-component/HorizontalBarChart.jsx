@@ -18,18 +18,20 @@ export function HorBarChart({data, temporal, startDate, endDate}){
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const HorBarPlot=Plot.plot({
       title:`Electricity Devices Consumption ${temporal? `Grouped By ${temporal}` : ""}`,
-      height: 600,
-      width: 800,
+      height: 300,
+      width: 1800,
       color: {legend: true},
+      x: {type: "utc"},
       marks: [
-        Plot.barX(filtered_data,
-          Plot.groupY({x: "sum"},{
-          x: "value",
-          y: "device",
-          fx: temporal? {value: 'timestamp', interval: temporal}: null,
-          fill: '#3127F5',
+        Plot.rectY(filtered_data,Plot.binX({y: "sum"},
+          {x: 'timestamp',
+          y: "value",
+          interval: temporal || 'month',
+          fy: "device",
+          sort: {y: "x"},
+          fill: 'device',
         })),
-        Plot.ruleX([0])
+        Plot.ruleY([0])
       ],
       y: {grid: true},
     });
