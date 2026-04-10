@@ -17,7 +17,6 @@ export function LinearPlot({data, temporal, startDate, endDate}){
     const filtered_data= (!startDate || !endDate)? flatten_data :
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const Lineplot=Plot.plot({
-      title:`Electricity Devices Consumption ${temporal? `Grouped By ${temporal}` : ""}`,
       height: 200,
       width: 1800,
       color: {legend: true},

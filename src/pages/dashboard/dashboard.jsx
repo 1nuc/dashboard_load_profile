@@ -40,18 +40,28 @@ export const Dashboard=()=>{
       <Navbar temporal={temporal} setTemporal={setTemporal} 
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
+
           <div className="desc1"> 
-          <h2>Distribution of All Devices Consumption Grouped By Different Time Scales </h2>
-        </div>
+            <h2>Distribution of All Devices Consumption Grouped By Different Time Scales </h2>
+          </div>
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
-          <div className="desc1"> Distribution of devices across time</div>
+
+          <div className="desc2">
+            <h2> Devices Distribution KPIs</h2>
+          </div>
           < KPI data={Data} startDate={startDate} endDate={endDate}/>
-          <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
-          <div className="desc1"> Distribution of devices across time</div>
+
+          <div className="desc3">
+            <h2> Summary Total Devices Consumption</h2>
+          </div>
           <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
-          <div className="desc1"> Distribution of devices across time</div>
+          <div className="desc4">
+            <h2> Consumption Comparison Between Devices </h2>
+          </div>
+          <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+
+          <div className="desc4"> Distribution of devices across time</div>
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
-          {/* <MultiTypePlot/> */}
       </div>
     </div>
   )
