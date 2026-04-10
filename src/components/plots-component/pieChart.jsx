@@ -25,7 +25,7 @@ export function PieChart({data, startDate, endDate}){
     maintainAspectRatio: false,
     responsive: true,
     plugins:{
-      legend: false,
+      legend:false,
     }
   }
   return ( 
