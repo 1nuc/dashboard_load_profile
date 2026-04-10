@@ -1,11 +1,12 @@
+import { useState, useEffect,useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import { LinearPlot } from '../../components/plots-component/lineplot'
 import { BarChart } from '../../components/plots-component/barchart'
 import Navbar from '../../components/navbar-component/navbar'
-import { useState, useEffect,useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
 import { HorBarChart } from '../../components/plots-component/PerformanceComparison'
 import { SumChart } from '../../components/plots-component/summaryPlot'
+import { PieChart } from '../../components/plots-component/pieChart'
 import { KPI } from '../../components/KPI/kpi'
 
 export const Dashboard=()=>{
@@ -50,6 +51,7 @@ export const Dashboard=()=>{
             <h2> Devices Distribution KPIs</h2>
           </div>
           < KPI data={Data} startDate={startDate} endDate={endDate}/>
+          < PieChart data={Data} startDate={startDate} endDate={endDate}/>
 
           <div className="desc3">
             <h2> Summary Total Devices Consumption</h2>
