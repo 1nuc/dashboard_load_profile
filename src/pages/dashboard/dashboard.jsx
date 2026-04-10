@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
 import { HorBarChart } from '../../components/plots-component/PerformanceComparison'
 import { SumChart } from '../../components/plots-component/summaryPlot'
+import { KPI } from '../../components/KPI/kpi'
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([]);
@@ -38,9 +39,15 @@ export const Dashboard=()=>{
       <Navbar temporal={temporal} setTemporal={setTemporal} 
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
+          <div className="desc1"> 
+          <h2>Distribution of All Devices Consumption Grouped By Different Time Scales </h2>
+        </div>
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <div className="desc1"> Distribution of devices across time</div>
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <div className="desc1"> Distribution of devices across time</div>
           <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
+          <div className="desc1"> Distribution of devices across time</div>
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
           {/* <MultiTypePlot/> */}
       </div>
