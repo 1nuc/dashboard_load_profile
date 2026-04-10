@@ -1,5 +1,7 @@
 .nav{
   display: flex;
+  position: sticky;
+  top:0;
   padding-left: 20px;
   flex-direction: column;
   backdrop-filter: blur(10px);

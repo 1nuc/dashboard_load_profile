@@ -7,7 +7,7 @@ import Navbar from '../../components/navbar-component/navbar'
 import { useState, useEffect,useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import{ GetPredictions } from '../../services/getPredictions'
-
+import { HorBarChart } from '../../components/plots-component/HorizontalBarChart'
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([]);
@@ -41,6 +41,7 @@ export const Dashboard=()=>{
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange}/>
       <div className= "dashboard">
           <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
           <AreaPlot/>
           <PiePlot/>

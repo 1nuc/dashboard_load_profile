@@ -32,6 +32,6 @@ export function BarChart({data, temporal, startDate, endDate, col}){
   },[data, temporal, startDate, endDate]);
 
   return (
-    <div className="line-card" ref={barRef}/>
+    <div className="bar-card" ref={barRef}/>
   );
 }
