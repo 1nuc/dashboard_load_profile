@@ -7,6 +7,7 @@ import{ GetPredictions } from '../../services/getPredictions'
 import { HorBarChart } from '../../components/plots-component/PerformanceComparison'
 import { SumChart } from '../../components/plots-component/summaryPlot'
 import { KPI } from '../../components/KPI/kpi'
+
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([]);
