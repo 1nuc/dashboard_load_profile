@@ -30,10 +30,11 @@ export function SumChart({data, temporal, startDate, endDate}){
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const SumPlot=Plot.plot({
       height: 400,
-      width: 600,
+      width: 1400,
+      marginLeft:180,
       color: {legend: true},
       style:{
-        fontSize: '13px',
+        fontSize: '11px',
         background: 'transparent',
       },
       marginLeft: 120,

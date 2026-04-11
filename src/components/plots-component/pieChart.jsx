@@ -52,7 +52,7 @@ export function PieChart({ data, startDate, endDate }) {
       .attr("stroke-width", 1.9);
 
     const total = d3.sum(pieData, (d) => d.value);
-    const labelArc = d3.arc().innerRadius(radius * 0.50).outerRadius(radius * 0.75);
+    const labelArc = d3.arc().innerRadius(radius * 0.75).outerRadius(radius * 0.75);
 
     svg.selectAll("text")
       .data(pie(pieData))
@@ -60,7 +60,7 @@ export function PieChart({ data, startDate, endDate }) {
       .filter((d) => (d.endAngle - d.startAngle) > 0.08 * 2 * Math.PI)
       .attr("transform", (d) => `translate(${labelArc.centroid(d)})`)
       .attr("text-anchor", "middle")
-      .style("font-size", "12px")
+      .style("font-size", "11px")
       .style("fill", "#fff")
       .text((d) => `${d.data.label} ${((d.data.value / total) * 100).toFixed(1)}%`)
 

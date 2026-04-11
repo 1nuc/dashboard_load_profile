@@ -24,9 +24,15 @@ export default function Navbar(props){
           <ul>
               {sidebar_elements.map((item) =>( 
               <li key={item.id}>
+                {item.panel==="report" ?(
+                  <a href="#" onClick={(e) => {e.preventDefault(); props.exportPDF?.()}}>
+                  report
+                  </a>
+                ):
                 <Link to ={`/${item.panel}`}>
                    {item.panel}
                 </Link>
+              }
               </li> 
         ))}
           </ul>
