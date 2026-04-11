@@ -72,7 +72,7 @@ export const Dashboard=()=>{
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
 
 
-          <div className="desc4"> 
+          <div className="desc5"> 
            <h2> Consumption Distribution of Each Device</h2> 
             <p> Chose a device from the list below to view its consumption distribution</p>
           </div>

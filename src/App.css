@@ -108,7 +108,7 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.desc1, .desc2, .desc3, .desc4{
+.desc1, .desc2, .desc3, .desc4, .desc5{
   display: flex;
   background: rgba(255, 255, 255, 0.25);
   border: 2.5px solid rgba(255, 255, 255, 0.5);
@@ -122,4 +122,9 @@ body {
   color: #19194f;
   gap: 15px;
   margin: 40px;
+}
+.desc1:hover, .desc2:hover, .desc3:hover, .desc4:hover, .desc5:hover{
+  background: none;
+  border:7.5 solid #19194F;
+  border-radius: 10px;
 }
