@@ -17,8 +17,8 @@ export function SumChart({data, temporal, startDate, endDate}){
     const filtered_data= (!startDate || !endDate)? flatten_data :
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const SumPlot=Plot.plot({
-      height: 300,
-      width: 1800,
+      height: 400,
+      width: 800,
       color: {legend: true},
       marks: [
         Plot.barX(filtered_data, Plot.groupY({x: "sum"},
