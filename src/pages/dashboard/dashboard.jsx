@@ -51,12 +51,12 @@ export const Dashboard=()=>{
             <h2> Devices Distribution KPIs</h2>
           </div>
           < KPI data={Data} startDate={startDate} endDate={endDate}/>
+          < PieChart data={Data} startDate={startDate} endDate={endDate}/>
 
           <div className="desc3">
             <h2> Summary Total Devices Consumption</h2>
           </div>
           <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
-          < PieChart data={Data} startDate={startDate} endDate={endDate}/>
 
           <div className="desc4">
             <h2> Consumption Comparison Between Devices </h2>
