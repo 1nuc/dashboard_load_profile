@@ -17,12 +17,11 @@ export function PieChart({ data, startDate, endDate }) {
       (col) => col !== "timestamp"
     );
 
-    const totals = columns.map((col) => ({
+    return columns.map((col) => ({
       label: col,
       value: filtered.reduce((acc, item) => acc + Number(item[col] || 0), 0),
     }));
 
-    return totals;
   }, [data, startDate, endDate]);
 
   useEffect(() => {
@@ -51,8 +50,7 @@ export function PieChart({ data, startDate, endDate }) {
       .join("path")
       .attr("d", arc)
       .attr("fill", (d) => color(d.data.label))
-      .attr("stroke", "white")
-      .attr("stroke-width", 1.5);
+      .attr("stroke-width", 1.9);
 
     const total = d3.sum(pieData, (d) => d.value);
     const labelArc = d3.arc().innerRadius(radius * 0.50).outerRadius(radius * 0.75);
