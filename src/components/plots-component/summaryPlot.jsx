@@ -32,6 +32,10 @@ export function SumChart({data, temporal, startDate, endDate}){
       height: 400,
       width: 600,
       color: {legend: true},
+      style:{
+        fontSize: '13px',
+        background: 'transparent',
+      },
       marginLeft: 120,
       marks: [
         Plot.barX(filtered_data, Plot.groupY({x: "sum"},

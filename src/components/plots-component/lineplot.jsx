@@ -31,6 +31,10 @@ export function LinearPlot({data, temporal, startDate, endDate}){
     const Lineplot=Plot.plot({
       height: 400,
       width: 1400,
+      style:{
+        fontSize: '13px',
+        background: 'transparent',
+      },
       color: {legend: true},
       marks: [
         Plot.lineY(filtered_data,{

@@ -14,6 +14,10 @@ export function BarChart({data, temporal, startDate, endDate, device}){
       marginRight: 80,
       marginLeft: 80,
       color: {legend: true},
+      style:{
+        fontSize: '13px',
+        background: 'transparent',
+      },
       marks: [
         Plot.rectY(filtered_data,
           Plot.binX(
