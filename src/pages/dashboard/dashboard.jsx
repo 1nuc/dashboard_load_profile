@@ -8,6 +8,7 @@ import { HorBarChart } from '../../components/plots-component/PerformanceCompari
 import { SumChart } from '../../components/plots-component/summaryPlot'
 import { PieChart } from '../../components/plots-component/pieChart'
 import { KPI } from '../../components/KPI/kpi'
+import { Cards } from '../../components/KPI/cards'
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
@@ -18,6 +19,7 @@ export const Dashboard=()=>{
   const [temporal, setTemporal]=useState(null);
   const [startDate, setStartDate]=useState("");
   const [endDate, setEndDate]=useState("");
+  const [device, setDevice]=useState("");
 
   useEffect(()=>{
     async function fetchData(){
@@ -26,8 +28,10 @@ export const Dashboard=()=>{
     fetchData();
   },[building]);
   // convert the datetime 
-  let Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
+  const Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   const dateTimeRange=Data.map(d=> d.timestamp);
+
+  //extracting the columns of the data
   return (
     <div>
       {
@@ -63,8 +67,13 @@ export const Dashboard=()=>{
           </div>
           <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
 
-          <div className="desc4"> Distribution of devices across time</div>
-          <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
+
+          <div className="desc4"> 
+           <h2> Consumption Distribution of Each Device</h2> 
+          </div>
+          <p> Chose a device from the list below to view its consumption distribution</p>
+          <Cards data={Data} device={device} setDevice={setDevice}/> 
+          <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} device={device}/>
       </div>
     </div>
   )
