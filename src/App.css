@@ -8,7 +8,8 @@
   display: inline-flex;
   border-radius: 20px;
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-  background: white;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2.5px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
 }
 .line-card:hover, .area-card:hover, .pie-card:hover, .bar-card:hover, .doughnut-card:hover, .multitype-card:hover {

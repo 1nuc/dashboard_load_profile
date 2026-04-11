@@ -29,7 +29,10 @@ export const Dashboard=()=>{
     fetchData();
   },[building]);
   // convert the datetime 
-  const Data=data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
+  const Data=useMemo(()=>{
+
+  return data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
+  }, [data]);
   const dateTimeRange=Data.map(d=> d.timestamp);
 
   //extracting the columns of the data

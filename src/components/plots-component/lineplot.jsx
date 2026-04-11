@@ -1,11 +1,11 @@
 import * as Plot from '@observablehq/plot';
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useMemo } from 'react'
 
 export function LinearPlot({data, temporal, startDate, endDate}){
   const linearRef=useRef();
-  useEffect(()=>{
+  const flatten_data = useMemo(()=>{
     if (!data || data.length===0) return;
-    const flatten_data = data.flatMap(d => [
+    return data.flatMap(d => [
       { timestamp: d.timestamp, value: d.AC, device: "AC" },
       { timestamp: d.timestamp, value: d.heating, device: "heating" },
       { timestamp: d.timestamp, value: d.television, device: "television" },
@@ -23,6 +23,9 @@ export function LinearPlot({data, temporal, startDate, endDate}){
       { timestamp: d.timestamp, value: d.lighting_interior, device: "lighting_interior" },
       { timestamp: d.timestamp, value: d.plug_loads, device: "plug_loads" },
     ]);    
+  }, [data]);
+  useEffect(()=>{
+    if(!flatten_data) return;
     const filtered_data= (!startDate || !endDate)? flatten_data :
      flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const Lineplot=Plot.plot({
@@ -40,9 +43,10 @@ export function LinearPlot({data, temporal, startDate, endDate}){
       y: {grid: true},
     });
 
+    linearRef.current.innerHTML="";
     linearRef.current.append(Lineplot);
     return ()=> Lineplot.remove();
-  },[data, temporal, startDate, endDate]);
+  },[flatten_data, temporal, startDate, endDate]);
 
   return (
     <div className="line-card" ref={linearRef}/>
