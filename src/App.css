@@ -24,7 +24,7 @@ body {
   background-color: #EDF5F5;
   background-image:
   radial-gradient(circle at 90% -5%, #B8E0E0  0%, transparent 45%),
-  radial-gradient(circle at 10% 110%, #19194F 0%, transparent 45%),
+  radial-gradient(circle at 10% 110%, #C4F5F4 0%, transparent 45%),
   radial-gradient(circle at 50% 50%, #8DC2AC 0%, transparent 35%);
 }
 
@@ -113,9 +113,12 @@ body {
   border: 2.5px solid rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 20px;
   width: 50%;
   height: 60px;
   color: #19194f;
+  gap: 15px;
   margin: 40px;
 }
