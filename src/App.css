@@ -3,7 +3,7 @@
   width: 800px;
   height: 500px;
 }
-.line-card, .sum-card,.bar-card, .doughnut-card, .hor-bar-card{
+.line-card, .area-card, .sum-card,.bar-card, .doughnut-card, .hor-bar-card{
   padding: 20px;
   display: inline-flex;
   border-radius: 20px;

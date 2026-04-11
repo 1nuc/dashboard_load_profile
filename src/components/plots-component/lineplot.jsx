@@ -33,7 +33,7 @@ export function LinearPlot({data, temporal, startDate, endDate}){
         Plot.lineY(filtered_data,{
           x: "timestamp",
           y: "value",
-          interval:temporal || "month",
+          interval:temporal || null,
           stroke: "device",
         }),
       ],

@@ -7,6 +7,7 @@ import{ GetPredictions } from '../../services/getPredictions'
 import { HorBarChart } from '../../components/plots-component/PerformanceComparison'
 import { SumChart } from '../../components/plots-component/summaryPlot'
 import { PieChart } from '../../components/plots-component/pieChart'
+import { AreaChart } from '../../components/plots-component/areachart'
 import { KPI } from '../../components/KPI/kpi'
 import { Cards } from '../../components/KPI/cards'
 
@@ -70,10 +71,11 @@ export const Dashboard=()=>{
 
           <div className="desc4"> 
            <h2> Consumption Distribution of Each Device</h2> 
+            <p> Chose a device from the list below to view its consumption distribution</p>
           </div>
-          <p> Chose a device from the list below to view its consumption distribution</p>
           <Cards data={Data} device={device} setDevice={setDevice}/> 
           <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} device={device}/>
+          <AreaChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} device={device}/>
       </div>
     </div>
   )

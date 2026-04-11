@@ -5,16 +5,15 @@ export function BarChart({data, temporal, startDate, endDate, device}){
   const barRef=useRef();
   useEffect(()=>{
     if (!data || data.length===0) return;
-    console.log(device)
     const filtered_data= (!startDate || !endDate)? data :
      data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const BarPlot=Plot.plot({
       title:`${device} Usage`,
-      height: 200,
-      width: 800,
+      height: 300,
+      width: 700,
       marginRight: 80,
+      marginLeft: 80,
       color: {legend: true},
-      x: {type: "utc"},
       marks: [
         Plot.rectY(filtered_data,
           Plot.binX(
@@ -22,13 +21,16 @@ export function BarChart({data, temporal, startDate, endDate, device}){
           x: "timestamp",
           y: device || "AC",
           interval:temporal || "month",
-          fill: '#3127F5',
+          fill: '#6827F5',
         })),
         Plot.ruleY([0])
       ],
-      y: {grid: true},
+      y: {
+        grid: true,
+      },
     });
 
+    barRef.current.innerHTML = "";
     barRef.current.append(BarPlot);
     return ()=> BarPlot.remove();
   },[data, temporal, startDate, endDate, device]);
