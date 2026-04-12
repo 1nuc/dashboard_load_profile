@@ -13,6 +13,7 @@ export function BarChart({data, temporal, startDate, endDate, device}){
       width: 700,
       marginRight: 80,
       marginLeft: 80,
+      marginBottom: 80,
       color: {legend: true},
       style:{
         fontSize: '13px',

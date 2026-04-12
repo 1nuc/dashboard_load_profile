@@ -26,7 +26,7 @@ export const Dashboard=()=>{
   useEffect(()=>{
     async function fetchData(){
       await GetPredictions({setData, building, setIsLoading});
-      setTimeOut(() => setIsLoading(false), 5000);
+      setTimeout(() => setIsLoading(false), 5000);
     }
     fetchData();
   },[building]);

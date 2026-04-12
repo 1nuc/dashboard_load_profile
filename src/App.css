@@ -1,6 +1,6 @@
 .pie-card{
   display: flex;
-  width: 800px;
+  width: 600px;
   height: 500px;
 }
 .line-card, .area-card, .sum-card,.bar-card, .doughnut-card, .hor-bar-card{

@@ -1,5 +1,5 @@
 .nav{
-  display: flex;
+  display: grid;
   position: sticky;
   top:0;
   flex-direction: column;
@@ -19,10 +19,8 @@
   color: #19194f;
 }
 .nav ul {
-  margin-left: auto;
   list-style-type: none;
   display: flex;
-  border-radius: 20px;
   gap: 4px;
   background: rgba(255, 255, 255, 0.25);
   height: auto;
@@ -33,7 +31,6 @@
   padding: 6px 16px;
   color: #19194f;
   border: 30px;
-  border-radius: 30px;
   font-size: 24px;
   transition: background 0.18s, color 0.18s;
   text-decoration: none;
@@ -41,7 +38,6 @@
 .nav li a:hover{
   color: #8DC2AC;
   background: #19194F;
-  border-radius: 30px;
 }
 
 .dropdown:hover{
@@ -53,6 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap:wrap;
 }
 .dropdown{
   height: 40px;
@@ -61,7 +58,6 @@
   position: relative;
   background: rgba(255, 255, 255, 0.25);
   border: 0.5px solid rgba(255, 255, 255, 0.5);
-  width: 250px;
   border-radius: 10px;
 }
 .time-range{
@@ -116,7 +112,6 @@ input[value=""]::-webkit-datetime-edit{
   align-items: center;
   height: 40px;
   margin: 2px 2px 35px;
-  width: 250px;
   padding:0;
   text-align: start;
   resize: none;
