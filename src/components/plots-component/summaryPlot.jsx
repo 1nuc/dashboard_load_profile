@@ -15,6 +15,7 @@ export function SumChart({flatten_data, temporal, startDate, endDate}){
       style:{
         fontSize: '11px',
         background: 'transparent',
+        color: '#19194f',
       },
       marginLeft: 120,
       marks: [

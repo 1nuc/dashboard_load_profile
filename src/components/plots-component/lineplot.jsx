@@ -10,10 +10,12 @@ export function LinearPlot({flatten_data, temporal, startDate, endDate}){
     const Lineplot=Plot.plot({
       height: 400,
       width: 1400,
+      marginBottom:80,
       style:{
         fontSize: '13px',
         background: 'transparent',
         overflow: 'hidden',
+        color: '#19194f',
       },
       color: {legend: true},
       marks: [

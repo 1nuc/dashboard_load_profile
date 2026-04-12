@@ -16,6 +16,7 @@ export function HorBarChart({flatten_data, temporal, startDate, endDate}){
         fontSize: '13px',
         background: 'transparent',
         overflow: 'hidden',
+        color: '#19194f',
       },
       x: {type: "utc"},
       marks: [

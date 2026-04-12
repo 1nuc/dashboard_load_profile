@@ -18,6 +18,7 @@ export function BarChart({data, temporal, startDate, endDate, device}){
       style:{
         fontSize: '13px',
         background: 'transparent',
+        color: '#19194f',
       },
       marks: [
         Plot.rectY(filtered_data,

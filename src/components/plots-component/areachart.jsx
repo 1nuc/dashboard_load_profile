@@ -19,6 +19,7 @@ export function AreaChart({data, temporal, startDate, endDate, device}){
       style:{
         fontSize: '13px',
         background: 'transparent',
+        color: '#19194f',
       },
       x: {type: "utc"},
       marks: [
