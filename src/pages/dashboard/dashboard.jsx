@@ -10,7 +10,7 @@ import { PieChart } from '../../components/plots-component/pieChart'
 import { AreaChart } from '../../components/plots-component/areachart'
 import { KPI } from '../../components/KPI/kpi'
 import { Cards } from '../../components/KPI/cards'
-import { generateReport } from '../../utils/pdfexport'
+import html2pdf from 'html2pdf.js'
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
@@ -34,9 +34,33 @@ export const Dashboard=()=>{
 
   return data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   }, [data]);
+
+  const flatten_data =useMemo(()=>{
+    if (!Data || Data.length===0) return;
+    return Data.flatMap(d => [
+      { timestamp: d.timestamp, value: d.AC, device: "AC" },
+      { timestamp: d.timestamp, value: d.heating, device: "heating" },
+      { timestamp: d.timestamp, value: d.television, device: "television" },
+      { timestamp: d.timestamp, value: d.dishwasher, device: "dishwasher" },
+      { timestamp: d.timestamp, value: d.ceiling_fan, device: "ceiling_fan" },
+      { timestamp: d.timestamp, value: d.refrigerator, device: "refrigerator" },
+      { timestamp: d.timestamp, value: d.clothes_washer, device: "clothes_washer" },
+      { timestamp: d.timestamp, value: d.clothes_dryer, device: "clothes_dryer" },
+      { timestamp: d.timestamp, value: d.cooling_fans_pumps, device: "cooling_fans_pumps" },
+      { timestamp: d.timestamp, value: d.freezer, device: "freezer" },
+      { timestamp: d.timestamp, value: d.heating_fans_pumps, device: "heating_fans_pumps" },
+      { timestamp: d.timestamp, value: d.hot_water, device: "hot_water" },
+      { timestamp: d.timestamp, value: d.lighting_exterior, device: "lighting_exterior" },
+      { timestamp: d.timestamp, value: d.lighting_garage, device: "lighting_garage" },
+      { timestamp: d.timestamp, value: d.lighting_interior, device: "lighting_interior" },
+      { timestamp: d.timestamp, value: d.plug_loads, device: "plug_loads" },
+    ]);    
+  }, [Data]); 
+
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportPDF= async()=>{
-    await generateReport(`nrel-dashboard-${building}`);
+    const element=document.querySelector("#nrel-dashboard");
+    html2pdf(element)
   };
 
   //extracting the columns of the data
@@ -52,7 +76,7 @@ export const Dashboard=()=>{
       }
       <Navbar temporal={temporal} setTemporal={setTemporal} 
         startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange} exportPDF={ExportPDF}/>
-      <div className= "dashboard" id={`nrel-dashboard-${building}`}>
+      <div className= "dashboard" id="nrel-dashboard">
 
           <div className="desc1"> 
             <h2>Distribution of All Devices Consumption Grouped By Different Time Scales </h2>
@@ -63,7 +87,7 @@ export const Dashboard=()=>{
           </p>
 
         </div>
-          <LinearPlot data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <LinearPlot flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate}/>
 
           <div className="desc2">
             <h2> Devices Distribution KPIs</h2>
@@ -86,7 +110,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <SumChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
+          <SumChart flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
 
           <div className="desc4">
             <h2> Consumption Comparison Between Devices </h2>
@@ -97,7 +121,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <HorBarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <HorBarChart flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate}/>
 
 
           <div className="desc5"> 

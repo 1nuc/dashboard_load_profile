@@ -32,7 +32,7 @@ body {
 .dashboard {
   flex: 1;
   overflow-y: auto;
-  overflow-x: auto;
+  overflow-x: hidden;
   display:flex ;
   flex-wrap: wrap;
   align-items: flex-start;
