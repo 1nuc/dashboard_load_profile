@@ -5,6 +5,7 @@ import './App.css';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { UtilityView } from './pages/utility/utility'
 import { HomePanel } from './pages/Home/home'
+import { Report } from './pages/report/Report'
 import { Metrics } from './pages/metrics/metrics'
 import { adminContext } from './components/AdminContext/adminContext'
 
@@ -19,6 +20,7 @@ function App() {
               <Route path='/' element={ <HomePanel/>}/>
               <Route path='/Home' element={ <HomePanel/>}/>
               <Route path='/metrics' element={ <Metrics/>}/>
+              <Route path='/Report' element={ <Report/>}/>
           </Routes>
       </BrowserRouter>
       </adminContext.Provider>

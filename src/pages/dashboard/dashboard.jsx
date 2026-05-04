@@ -1,5 +1,5 @@
 import { useState, useEffect,useMemo, useContext } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { LinearPlot } from '../../components/plots-component/lineplot'
 import { BarChart } from '../../components/plots-component/barchart'
 import Navbar from '../../components/navbar-component/navbar'
@@ -11,10 +11,12 @@ import { AreaChart } from '../../components/plots-component/areachart'
 import { KPI } from '../../components/KPI/kpi'
 import { Cards } from '../../components/KPI/cards'
 import html2pdf from 'html2pdf.js'
+import { Report } from '../report/Report'
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
   const [data, setData]=useState([]);
+  const navigate=useNavigate();
   const globalState=useLocation();
   const building= globalState.state?.building;
   const [isLoading, setIsLoading]=useState(false);
@@ -56,11 +58,17 @@ export const Dashboard=()=>{
       { timestamp: d.timestamp, value: d.plug_loads, device: "plug_loads" },
     ]);    
   }, [Data]); 
+  const filtered_data=useMemo(()=>{
+    if (!flatten_data || flatten_data.length===0) return;
+    return [...flatten_data].sort((a, b) => b.value- a.value).slice(0,10);
+  }, [flatten_data]);
+  console.log(filtered_data);
 
   const dateTimeRange=Data.map(d=> d.timestamp);
-  const ExportPDF= async()=>{
-    const element=document.querySelector("#nrel-dashboard");
-    html2pdf(element)
+  const ExportReport= async()=>{
+    navigate('/Report', {state: {flatten_data} });
+    // const element=document.querySelector("#nrel-dashboard");
+    // html2pdf(element)
   };
 
   //extracting the columns of the data
@@ -75,7 +83,7 @@ export const Dashboard=()=>{
 
       }
       <Navbar temporal={temporal} setTemporal={setTemporal} 
-        startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange} exportPDF={ExportPDF}/>
+        startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} dateTimeRange={dateTimeRange} exportReport={ExportReport}/>
       <div className= "dashboard" id="nrel-dashboard">
 
           <div className="desc1"> 
