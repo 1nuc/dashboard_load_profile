@@ -1,4 +1,4 @@
-import { useState, useEffect,useMemo } from 'react'
+import { useState, useEffect,useMemo, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LinearPlot } from '../../components/plots-component/lineplot'
 import { BarChart } from '../../components/plots-component/barchart'

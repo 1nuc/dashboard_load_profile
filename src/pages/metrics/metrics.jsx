@@ -1,8 +1,10 @@
 import { getMetrics } from '../../services/getMetrics';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './metrics.css';
+import { adminContext } from '../../components/AdminContext/adminContext';
 
 export const Metrics=()=>{
+  const {isAdmin, setIsAdmin}=useContext(adminContext);
   const [metricsreq, setMetricsReq]=useState([]);
   useEffect(()=>{
     async function fetchMetrics(){
@@ -22,7 +24,6 @@ export const Metrics=()=>{
   const crossValid=JSON.parse(metricsreq.cross_val_metrics);
   // defining the variable needed to hold the columns
   const crossValid_cols=Object.keys(crossValid[0]);
-  console.log(crossValid)
 
   return (
     <div className="metrics-page">
@@ -48,7 +49,7 @@ export const Metrics=()=>{
         </table>
       </div>
 
-      <div className="cross-validation">
+      {isAdmin && <div className="cross-validation">
         <table>
           <thead>
             <tr>
@@ -72,6 +73,7 @@ export const Metrics=()=>{
           </tbody>
         </table>
       </div>
+      }
     </div>
   );
 }

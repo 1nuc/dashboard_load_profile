@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GetBuildings } from '../../services/getBuilding'
 import { UtilityView } from '../../pages/utility/utility'
+import { adminContext } from '../../components/AdminContext/adminContext'
 // a function to get the buildings
 let fetchBuidings=({userName, password, buildings, navigate})=>{
   if (userName != "crosscompute" || password != "222003"){
@@ -16,6 +17,7 @@ let fetchBuidings=({userName, password, buildings, navigate})=>{
 // a pop up login function for the utility login 
 function AdminLogin(props){
 
+  const {isAdmin, setIsAdmin}=useContext(adminContext);
   const [userName, setUserName]= useState('');
   const [password, setPassword]= useState('');
   const navigate=useNavigate();
@@ -41,7 +43,10 @@ function AdminLogin(props){
               </label>
               <button className="login-btn"
                 onClick={
-                  ()=> fetchBuidings({userName, password, buildings: props.buildings, navigate})
+                  ()=>{
+                       setIsAdmin(true);
+                       fetchBuidings({userName, password, buildings: props.buildings, navigate});
+                  }
                 }>Login</button>
           </div>
         )
@@ -60,6 +65,7 @@ function checkBuilding(props){
 }
 
 export const HomePanel=() =>{
+  const {isAdmin, setIsAdmin}=useContext(adminContext);
   const [buildings, setBuildings]=useState([]);
   const navigate=useNavigate();
   const [bldg_id, setBldg_id]=useState('');
@@ -81,7 +87,11 @@ export const HomePanel=() =>{
                  <textarea className="bldg-id" value={bldg_id} onChange={(e)=> setBldg_id(e.target.value)} 
         placeholder='Enter your building ID, ex. 171237'/>
             </label>
-            <button onClick={()=>checkBuilding({buildings, bldg_id, navigate})}> Search </button>
+            <button onClick={()=>{
+                setIsAdmin(false);
+                checkBuilding({buildings, bldg_id, navigate});
+                }
+            }> Search </button>
       </div>
     </>
   )
