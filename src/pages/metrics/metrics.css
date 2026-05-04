@@ -1,11 +1,12 @@
 .metrics-page{
   display: flex;
+  margin-top: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
 }
 .metrics, .cross-validation{
   display: flex;
-  margin-top: 20px;
   margin-left: 100px;
 }
 .metrics table {
@@ -20,6 +21,7 @@
 }
 
 th {
+    padding: 10px;
     border-bottom: 1px solid black;
     color: #8DC2AC;
     background: #19194F;
@@ -28,6 +30,7 @@ th {
 }
 
 td {
+    padding: 10px;
     border: 0.5px solid;
     text-align: center;
     color: #19194F;
