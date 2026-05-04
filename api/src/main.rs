@@ -1,7 +1,6 @@
 use axum::{Router, extract::Path, http::HeaderValue, response::IntoResponse, routing::get, serve};
 use reqwest::{Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}};
 use tokio::net::TcpListener;
-use serde::Deserialize;
 use tower_http::cors::{CorsLayer};
 #[tokio::main]
 async fn main() {
@@ -9,6 +8,7 @@ async fn main() {
     let app=Router::new()
         .route("/bldg", get(get_buildings))
         .route("/predictions/{bldg_id}", get(get_data))
+        .route("/metrics", get(get_metrics))
         .layer(cors());
     serve(addrs, app).await.unwrap();
 }
@@ -20,15 +20,21 @@ fn cors()-> CorsLayer{
         .allow_headers([ACCEPT,AUTHORIZATION, CONTENT_TYPE])
 }
 
-#[derive(Deserialize)]
-struct Data{
-    data: String,
-}
-
 async fn get_data(Path(bldg_id): Path<String>) -> impl IntoResponse{
     let client=reqwest::Client::new();
     let res=client.get(format!("http://localhost:8000/predictions/{bldg_id}"))
         .send().await;
+    match res{
+        Ok(msg) => {
+            msg.text().await.unwrap()
+        } 
+        Err(_) => "error in sending the get response to the server".to_string()
+    }
+}
+
+async fn get_metrics() -> String{
+    let client=reqwest::Client::new();
+    let res=client.get("http://localhost:8000/metrics").send().await;
     match res{
         Ok(msg) => {
             msg.text().await.unwrap()
