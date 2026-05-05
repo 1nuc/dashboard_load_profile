@@ -1,4 +1,4 @@
-.report{
+.report, .contents{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@
 .header-report{
   padding: 10px;
   background: rgba(255, 255, 255, 0.25);
-  border: 2.5px solid rgba(255, 255, 255, 0.5);
+  border: 2.5px solid #ffffff;
   border-radius: 20px;
 }
 .text {
@@ -39,7 +39,7 @@
 
   color: #19194f;
   background: rgba(255, 255, 255, 0.25);
-  border: 3.5px solid rgba(255, 255, 255, 0.5);
+  border: 3.5px solid #ffffff;
   border-radius: 8px;
   padding: 12px 14px;
   cursor: pointer;
@@ -59,4 +59,3 @@
     background: rgba(255, 255, 255, 0.5);
     border-collapse: collapse;
 }
-

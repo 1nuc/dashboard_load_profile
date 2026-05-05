@@ -10,11 +10,11 @@ import { PieChart } from '../../components/plots-component/pieChart'
 import { AreaChart } from '../../components/plots-component/areachart'
 import { KPI } from '../../components/KPI/kpi'
 import { Cards } from '../../components/KPI/cards'
-import html2pdf from 'html2pdf.js'
 import { Report } from '../report/Report'
 
 export const Dashboard=()=>{
   // use the global location to render the buildilng ID
+
   const [data, setData]=useState([]);
   const navigate=useNavigate();
   const globalState=useLocation();
@@ -45,6 +45,7 @@ export const Dashboard=()=>{
     if (!Data || Data.length===0) return;
     const observation= Data.flatMap(d => [
       { timestamp: d.timestamp, value: d.AC, device: "AC" },
+      { timestamp: d.timestamp, value: d['Total Consumption'], device: "Total Consumption"},
       { timestamp: d.timestamp, value: d.heating, device: "heating" },
       { timestamp: d.timestamp, value: d.television, device: "television" },
       { timestamp: d.timestamp, value: d.dishwasher, device: "dishwasher" },
@@ -67,9 +68,7 @@ export const Dashboard=()=>{
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
-    navigate('/Report', {state: {flatten_data, temporal, devData, building, startDate, endDate} });
-    // const element=document.querySelector("#nrel-dashboard");
-    // html2pdf(element)
+    navigate('/Report', {state: {flatten_data, temporal, devData, building} });
   };
 
   //extracting the columns of the data
