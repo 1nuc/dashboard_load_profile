@@ -51,7 +51,7 @@ export const Report=()=>{
   const endDate = new Date(dateTimeRange.reduce((a, b) => Math.max(a, b)));
 
   const total=filtered_data.slice(0,1)[0].value;
-  const col=filtered_data.slice(0,2)[1].value;
+  const col=filtered_data.slice(0,2)[1].device;
   return (
     <div className="contents">
       <button className="back" onClick={()=> navigate('/Home')}>Home</button>
