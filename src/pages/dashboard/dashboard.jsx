@@ -67,7 +67,7 @@ export const Dashboard=()=>{
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
-    navigate('/Report', {state: {flatten_data, temporal, devData} });
+    navigate('/Report', {state: {flatten_data, temporal, devData, building, startDate, endDate} });
     // const element=document.querySelector("#nrel-dashboard");
     // html2pdf(element)
   };

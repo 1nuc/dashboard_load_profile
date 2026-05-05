@@ -10,6 +10,9 @@ export const Report=()=>{
   const flatten_data= State.state?.flatten_data;
   const temporal= State.state?.temporal;
   const devData= State.state?.devData;
+  const building= State.state?.building;
+  const startDate= State.state?.startDate;
+  const endDate= State.state?.endDate;
   if (!flatten_data || flatten_data.length=== 0){
     return;
   }
@@ -29,13 +32,15 @@ export const Report=()=>{
   return (
 
       <div className="report">
-        <div className="details">
-          <h2>User: {isAdmin? "Utility": "Customer"}</h2>
-        </div>
-
+        <h2 className="header-report">Load Profile Decomposition Report </h2>
+        <div className="text">   This report provides a breakdown of energy consumption across monitored devices for the selected period. 
+  Use it to identify high-consumption devices and optimize load distribution.
+      </div>
         <div className="table-devices">
-          <h2> Top 10 Devices consuming energy</h2>
-
+          <h2 className="header-report"> Top 10 Devices consuming energy</h2>
+          <div className="text">  The table below ranks the top 10 devices by total energy consumed during the reporting period. 
+  Values are aggregated across all recorded intervals.
+        </div>
           <table>
             <thead>
               <tr>
@@ -53,8 +58,22 @@ export const Report=()=>{
             </tbody>
           </table>
         </div>
-        
+        <div className="details">
+          <ul>
+            <li>User</li>
+            <li>{isAdmin? "Utility": "Customer"}</li>
+            <li>State</li><li> Florida </li>
+            <li>Building</li> <li>{building} </li>
+            <li>Temporal Unit</li> <li> {temporal? temporal: "not Set"} </li>
+            <li>Start Date</li><li> {startDate}</li>
+            <li>End Date</li><li> {endDate}</li>
+            <li> Total Consumption</li> <li> </li>
+          </ul>
+        </div>
 
+          <h2 className="header-report"> Distribution of the Most Consuming Device</h2>
+          <div className="text"> The chart below shows the AC unit's energy usage trend aggregated by {temporal || "month"}. 
+  Peaks may indicate inefficient usage patterns or high-demand periods.</div>
         <AreaChart data= {devData} temporal={temporal} device="AC" width="500"/>
       </div>
   );
