@@ -1,0 +1,12 @@
+.report{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.report table {
+    width: auto;
+    height: auto;
+    background: rgba(255, 255, 255, 0.5);
+    border-collapse: collapse;
+}
+

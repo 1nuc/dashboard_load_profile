@@ -13,25 +13,27 @@
     width: 800px;
     height: 100px;
     background: rgba(255, 255, 255, 0.5);
+    border-collapse: collapse;
 }
-.cross-validation table {
+table{
     width: auto;
     height: auto;
     background: rgba(255, 255, 255, 0.5);
+    border-collapse: collapse;
 }
 
-th {
+th{
     padding: 10px;
-    border-bottom: 1px solid black;
+    border: 0.5px solid rgba(255, 255, 255, 0.35); 
     color: #8DC2AC;
     background: #19194F;
     height: 30px;
     cursor: pointer;
 }
 
-td {
+td{
     padding: 10px;
-    border: 0.5px solid;
+    border: 0.5px solid rgba(3, 16, 101, 0.51); 
     text-align: center;
     color: #19194F;
     cursor: pointer;

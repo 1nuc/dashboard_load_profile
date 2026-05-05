@@ -58,11 +58,6 @@ export const Dashboard=()=>{
       { timestamp: d.timestamp, value: d.plug_loads, device: "plug_loads" },
     ]);    
   }, [Data]); 
-  const filtered_data=useMemo(()=>{
-    if (!flatten_data || flatten_data.length===0) return;
-    return [...flatten_data].sort((a, b) => b.value- a.value).slice(0,10);
-  }, [flatten_data]);
-  console.log(filtered_data);
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
