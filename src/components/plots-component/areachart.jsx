@@ -2,14 +2,14 @@ import * as Plot from '@observablehq/plot';
 import { useRef, useEffect } from 'react'
 import * as htl from "htl";
 
-export function AreaChart({data, temporal, device}){
+export function AreaChart({data, temporal, device, width}){
   const areaRef=useRef();
   useEffect(()=>{
     if (!data || data.length===0) return;
     const AreaPlot=Plot.plot({
       title:`${device} Usage`,
       height: 300,
-      width: 700,
+      width: width? +width: 700,
       marginRight: 80,
       marginLeft: 80,
       color: {legend: true},

@@ -2,11 +2,14 @@ import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import './report.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
+import { AreaChart } from '../../components/plots-component/areachart'
 
 export const Report=()=>{
   const {isAdmin, setIsAdmin}=useContext(adminContext);
   const State=useLocation();
   const flatten_data= State.state?.flatten_data;
+  const temporal= State.state?.temporal;
+  const devData= State.state?.devData;
   if (!flatten_data || flatten_data.length=== 0){
     return;
   }
@@ -26,8 +29,13 @@ export const Report=()=>{
   return (
 
       <div className="report">
-        <div className="table-device">
-            <h2> Top 10 Devices consuming energy</h2>
+        <div className="details">
+          <h2>User: {isAdmin? "Utility": "Customer"}</h2>
+        </div>
+
+        <div className="table-devices">
+          <h2> Top 10 Devices consuming energy</h2>
+
           <table>
             <thead>
               <tr>
@@ -45,6 +53,9 @@ export const Report=()=>{
             </tbody>
           </table>
         </div>
+        
+
+        <AreaChart data= {devData} temporal={temporal} device="AC" width="500"/>
       </div>
   );
 }

@@ -1,7 +1,16 @@
 .report{
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  flex-direction: column;
+}
+.table-devices{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 .report table {
     width: auto;
