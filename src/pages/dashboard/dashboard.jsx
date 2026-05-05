@@ -33,13 +33,17 @@ export const Dashboard=()=>{
   },[building]);
   // convert the datetime 
   const Data=useMemo(()=>{
-
   return data?.map(d =>({...d, timestamp: new Date(d["timestamp"])}));
   }, [data]);
 
+  const devData=useMemo(()=>{
+    return (!startDate || !endDate)? Data :
+     Data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
+  }, [Data, startDate, endDate]);
+
   const flatten_data =useMemo(()=>{
     if (!Data || Data.length===0) return;
-    return Data.flatMap(d => [
+    const observation= Data.flatMap(d => [
       { timestamp: d.timestamp, value: d.AC, device: "AC" },
       { timestamp: d.timestamp, value: d.heating, device: "heating" },
       { timestamp: d.timestamp, value: d.television, device: "television" },
@@ -57,7 +61,9 @@ export const Dashboard=()=>{
       { timestamp: d.timestamp, value: d.lighting_interior, device: "lighting_interior" },
       { timestamp: d.timestamp, value: d.plug_loads, device: "plug_loads" },
     ]);    
-  }, [Data]); 
+    return (!startDate || !endDate)? observation :
+     observation.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
+  }, [Data, startDate, endDate]); 
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
@@ -90,7 +96,7 @@ export const Dashboard=()=>{
           </p>
 
         </div>
-          <LinearPlot flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <LinearPlot flatten_data= {flatten_data} temporal={temporal}/>
 
           <div className="desc2">
             <h2> Devices Distribution KPIs</h2>
@@ -101,7 +107,7 @@ export const Dashboard=()=>{
             at a glance.
             </p>
           </div>
-          < KPI data={Data} startDate={startDate} endDate={endDate}/>
+          < KPI data={devData}/>
           < PieChart data={Data} startDate={startDate} endDate={endDate}/>
 
           <div className="desc3">
@@ -113,7 +119,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <SumChart flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate} col="AC"/>
+          <SumChart flatten_data= {flatten_data} temporal={temporal} col="AC"/>
 
           <div className="desc4">
             <h2> Consumption Comparison Between Devices </h2>
@@ -124,7 +130,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <HorBarChart flatten_data= {flatten_data} temporal={temporal} startDate={startDate} endDate={endDate}/>
+          <HorBarChart flatten_data= {flatten_data} temporal={temporal}/>
 
 
           <div className="desc5"> 
@@ -136,9 +142,9 @@ export const Dashboard=()=>{
               that device.
             </p>
           </div>
-          <Cards data={Data} device={device} setDevice={setDevice}/> 
-          <BarChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} device={device}/>
-          <AreaChart data= {Data} temporal={temporal} startDate={startDate} endDate={endDate} device={device}/>
+          <Cards data={devData} device={device} setDevice={setDevice}/> 
+          <BarChart data= {devData} temporal={temporal} device={device}/>
+          <AreaChart data= {devData} temporal={temporal} device={device}/>
       </div>
     </div>
   )

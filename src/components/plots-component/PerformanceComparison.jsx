@@ -1,12 +1,10 @@
 import * as Plot from '@observablehq/plot';
 import { useRef, useEffect,useMemo } from 'react'
 
-export function HorBarChart({flatten_data, temporal, startDate, endDate}){
+export function HorBarChart({flatten_data, temporal}){
   const horRef=useRef();
   useEffect(()=>{
     if(!flatten_data) return;
-    const filtered_data= (!startDate || !endDate)? flatten_data :
-     flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const HorBarPlot=Plot.plot({
       height: 600,
       width: 1000,
@@ -20,7 +18,7 @@ export function HorBarChart({flatten_data, temporal, startDate, endDate}){
       },
       x: {type: "utc"},
       marks: [
-        Plot.rectY(filtered_data,Plot.binX({y: "sum"},
+        Plot.rectY(flatten_data,Plot.binX({y: "sum"},
           {x: 'timestamp',
           y: "value",
           interval: temporal || 'month',
@@ -37,7 +35,7 @@ export function HorBarChart({flatten_data, temporal, startDate, endDate}){
     horRef.current.innerHTML = "";
     horRef.current.append(HorBarPlot);
     return ()=> HorBarPlot.remove();
-  },[flatten_data, temporal, startDate, endDate]);
+  },[flatten_data, temporal]);
 
   return (
     <div className="hor-bar-card" ref={horRef}/>

@@ -1,12 +1,10 @@
 import * as Plot from '@observablehq/plot';
 import { useRef, useEffect } from 'react'
 
-export function BarChart({data, temporal, startDate, endDate, device}){
+export function BarChart({data, temporal, device}){
   const barRef=useRef();
   useEffect(()=>{
     if (!data || data.length===0) return;
-    const filtered_data= (!startDate || !endDate)? data :
-     data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const BarPlot=Plot.plot({
       title:`${device} Usage`,
       height: 300,
@@ -18,10 +16,9 @@ export function BarChart({data, temporal, startDate, endDate, device}){
       style:{
         fontSize: '13px',
         background: 'transparent',
-        color: '#19194f',
       },
       marks: [
-        Plot.rectY(filtered_data,
+        Plot.rectY(data,
           Plot.binX(
             {y: "sum"}, {
           x: "timestamp",
@@ -39,7 +36,7 @@ export function BarChart({data, temporal, startDate, endDate, device}){
     barRef.current.innerHTML = "";
     barRef.current.append(BarPlot);
     return ()=> BarPlot.remove();
-  },[data, temporal, startDate, endDate, device]);
+  },[data, temporal, device]);
 
   return (
     <div className="bar-card" ref={barRef}/>

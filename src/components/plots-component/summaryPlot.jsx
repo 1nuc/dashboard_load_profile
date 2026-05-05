@@ -1,12 +1,10 @@
 import * as Plot from '@observablehq/plot';
 import { useRef, useEffect, useMemo } from 'react'
 
-export function SumChart({flatten_data, temporal, startDate, endDate}){
+export function SumChart({flatten_data, temporal}){
   const sumRef=useRef();
   useEffect(()=>{
     if(!flatten_data) return;
-    const filtered_data= (!startDate || !endDate)? flatten_data :
-     flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const SumPlot=Plot.plot({
       height: 400,
       width: 1400,
@@ -19,7 +17,7 @@ export function SumChart({flatten_data, temporal, startDate, endDate}){
       },
       marginLeft: 120,
       marks: [
-        Plot.barX(filtered_data, Plot.groupY({x: "sum"},
+        Plot.barX(flatten_data, Plot.groupY({x: "sum"},
           {x: 'value',
           y: "device",
           sort: {y: "-x"},
@@ -34,7 +32,7 @@ export function SumChart({flatten_data, temporal, startDate, endDate}){
     sumRef.current.innerHTML = "";
     sumRef.current.append(SumPlot);
     return ()=> SumPlot.remove();
-  },[flatten_data, temporal, startDate, endDate]);
+  },[flatten_data, temporal]);
 
   return (
     <div className="sum-card" ref={sumRef}/>

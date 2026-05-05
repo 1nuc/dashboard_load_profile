@@ -1,12 +1,10 @@
 import * as Plot from '@observablehq/plot';
 import { useRef, useEffect, useMemo } from 'react'
 
-export function LinearPlot({flatten_data, temporal, startDate, endDate}){
+export function LinearPlot({flatten_data, temporal}){
   const linearRef=useRef();
   useEffect(()=>{
     if(!flatten_data) return;
-    const filtered_data= (!startDate || !endDate)? flatten_data :
-     flatten_data.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
     const Lineplot=Plot.plot({
       height: 400,
       width: 1400,
@@ -19,7 +17,7 @@ export function LinearPlot({flatten_data, temporal, startDate, endDate}){
       },
       color: {legend: true},
       marks: [
-        Plot.lineY(filtered_data,{
+        Plot.lineY(flatten_data,{
           x: "timestamp",
           y: "value",
           interval:temporal || null,
@@ -32,7 +30,7 @@ export function LinearPlot({flatten_data, temporal, startDate, endDate}){
     linearRef.current.innerHTML="";
     linearRef.current.append(Lineplot);
     return ()=> Lineplot.remove();
-  },[flatten_data, temporal, startDate, endDate]);
+  },[flatten_data, temporal]);
 
   return (
     <div className="line-card" ref={linearRef}/>

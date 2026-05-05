@@ -14,6 +14,7 @@ export function PieChart({ data, startDate, endDate }) {
       : data;
 
     const columns = Object.keys(filtered[0] ?? {}).filter(
+      //get all the columns but not the timestamp
       (col) => col !== "timestamp"
     );
 

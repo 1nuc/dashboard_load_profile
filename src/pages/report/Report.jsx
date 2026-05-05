@@ -10,6 +10,7 @@ export const Report=()=>{
   if (!flatten_data || flatten_data.length=== 0){
     return;
   }
+  // Extract the data
   const filtered_data=useMemo(()=>{
     if (!flatten_data || flatten_data.length===0) return;
     return Object.entries(flatten_data.reduce((group, item)=>{
@@ -21,24 +22,29 @@ export const Report=()=>{
     },{})).map(([device, value]) => ({device, value})
       ).sort((a, b) => b.value- a.value).slice(0,10).map(d=> ({...d, value: d.value.toFixed(3)}));
   }, [flatten_data]);
+
   return (
+
       <div className="report">
-        <table>
-          <thead>
-            <tr>
-                <th> device</th>
-                <th> value</th>
-            </tr>
-          </thead>
-          <tbody>
-              {filtered_data.map((val, key) => (
-              <tr key={key}>
-                <td> {val.device} </td>
-                <td> {val.value} </td>
+        <div className="table-device">
+            <h2> Top 10 Devices consuming energy</h2>
+          <table>
+            <thead>
+              <tr>
+                  <th> device</th>
+                  <th> value</th>
               </tr>
-                ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+                {filtered_data.map((val, key) => (
+                <tr key={key}>
+                  <td> {val.device} </td>
+                  <td> {val.value} </td>
+                </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
       </div>
   );
 }

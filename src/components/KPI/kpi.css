@@ -32,7 +32,6 @@
 
 .kpi-label {
   font-size: 11px;
-  color: #888;
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -42,9 +41,15 @@
 .kpi-value, .dev-label {
   font-size: 18px;
   font-weight: 500;
-  color: #19194f;
 }
 .dev-label{
   overflow: hidden;
   white-space: nowrap;
+}
+.kpi-card, .cards{
+  color: #19194f;
+}
+.kpi-card:hover{
+  color: #CCF0DD;
+  background: #19194f;
 }
