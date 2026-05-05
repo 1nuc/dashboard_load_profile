@@ -6,12 +6,13 @@ export function PieChart({ data, startDate, endDate }) {
 
   const pieData = useMemo(() => {
     if (!data || data.length === 0) return null;
+    const pie_data=data.map(({Total, ...rest}) => rest);
     const start = startDate ? new Date(startDate) : null;
     const end = endDate ? new Date(endDate) : null;
 
     const filtered = start && end
-      ? data.filter((d) => d.timestamp >= start && d.timestamp <= end)
-      : data;
+      ? pie_data.filter((d) => d.timestamp >= start && d.timestamp <= end)
+      : pie_data;
 
     const columns = Object.keys(filtered[0] ?? {}).filter(
       //get all the columns but not the timestamp

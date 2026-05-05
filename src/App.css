@@ -79,7 +79,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   background: rgba(255,255,255,0);
 }
-.btn-utility, .cancel-btn{
+.btn-utility, .cancel-btn, .back{
   position: fixed;
   top: 4%;
   left: 90%;

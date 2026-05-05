@@ -22,7 +22,7 @@ export function BarChart({data, temporal, device}){
           Plot.binX(
             {y: "sum"}, {
           x: "timestamp",
-          y: device || "Total Consumption",
+          y: device || "Total",
           interval:temporal || "month",
           fill: '#6827F5',
         })),

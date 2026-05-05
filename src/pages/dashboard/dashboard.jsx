@@ -45,7 +45,7 @@ export const Dashboard=()=>{
     if (!Data || Data.length===0) return;
     const observation= Data.flatMap(d => [
       { timestamp: d.timestamp, value: d.AC, device: "AC" },
-      { timestamp: d.timestamp, value: d['Total Consumption'], device: "Total Consumption"},
+      { timestamp: d.timestamp, value: d.Total, device: "Total"},
       { timestamp: d.timestamp, value: d.heating, device: "heating" },
       { timestamp: d.timestamp, value: d.television, device: "television" },
       { timestamp: d.timestamp, value: d.dishwasher, device: "dishwasher" },
@@ -65,6 +65,8 @@ export const Dashboard=()=>{
     return (!startDate || !endDate)? observation :
      observation.filter(d => (d.timestamp>= new Date(startDate) && d.timestamp <= new Date(endDate)));
   }, [Data, startDate, endDate]); 
+
+  const plotData=flatten_data? flatten_data.filter(d => d.device!="Total") :'';
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
@@ -95,7 +97,7 @@ export const Dashboard=()=>{
           </p>
 
         </div>
-          <LinearPlot flatten_data= {flatten_data} temporal={temporal}/>
+          <LinearPlot flatten_data= {plotData} temporal={temporal}/>
 
           <div className="desc2">
             <h2> Devices Distribution KPIs</h2>
@@ -118,7 +120,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <SumChart flatten_data= {flatten_data} temporal={temporal} col="AC"/>
+          <SumChart flatten_data= {plotData} temporal={temporal} col="AC"/>
 
           <div className="desc4">
             <h2> Consumption Comparison Between Devices </h2>
@@ -129,7 +131,7 @@ export const Dashboard=()=>{
             </p>
 
         </div>
-          <HorBarChart flatten_data= {flatten_data} temporal={temporal}/>
+          <HorBarChart flatten_data= {plotData} temporal={temporal}/>
 
 
           <div className="desc5"> 

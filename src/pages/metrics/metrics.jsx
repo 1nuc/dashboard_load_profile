@@ -2,10 +2,12 @@ import { getMetrics } from '../../services/getMetrics';
 import { useState, useEffect, useContext } from 'react';
 import './metrics.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
+import { useNavigate } from 'react-router-dom'
 
 export const Metrics=()=>{
   const {isAdmin, setIsAdmin}=useContext(adminContext);
   const [metricsreq, setMetricsReq]=useState([]);
+  const navigate=useNavigate();
   useEffect(()=>{
     async function fetchMetrics(){
       await getMetrics({setMetricsReq});
@@ -27,6 +29,7 @@ export const Metrics=()=>{
 
   return (
     <div className="metrics-page">
+      <button className="back" onClick={()=> navigate('/Home')}>Home</button>
       <div className="metrics">
         <table>
           <thead>

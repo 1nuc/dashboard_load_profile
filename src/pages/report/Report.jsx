@@ -1,5 +1,5 @@
 import { useState, useContext, useMemo, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './report.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
 import { AreaChart } from '../../components/plots-component/areachart'
@@ -27,6 +27,7 @@ export const Report=()=>{
   const {isAdmin, setIsAdmin}=useContext(adminContext);
   const State=useLocation();
   const flatten_data= State.state?.flatten_data;
+  const navigate=useNavigate();
   const temporal= State.state?.temporal;
   const devData= State.state?.devData;
   const building= State.state?.building;
@@ -50,9 +51,10 @@ export const Report=()=>{
   const endDate = new Date(dateTimeRange.reduce((a, b) => Math.max(a, b)));
 
   const total=filtered_data.slice(0,1)[0].value;
-  const col=filtered_data.slice(0,2)[1].device;
+  const col=filtered_data.slice(0,2)[1].value;
   return (
     <div className="contents">
+      <button className="back" onClick={()=> navigate('/Home')}>Home</button>
       <button onClick={exportPDF}>Download PDF</button>
       <div className="report" ref={reportRef}>
         <h2 className="header-report">Load Profile Decomposition Report </h2>
@@ -99,7 +101,7 @@ export const Report=()=>{
             Total energy consumption aggregated by {temporal || "month"} for building {building} from {startDate.toISOString().slice(0,10)} to {endDate.toISOString().slice(0,10)}.
             If the plot is empty maybe you should specify the temporal unit
           </div>
-        <AreaChart data= {devData} temporal={temporal} device="Total Consumption" width="500"/>
+        <AreaChart data= {devData} temporal={temporal} device="Total" width="500"/>
 
           <h2 className="header-report"> Distribution of the Most Consuming Device</h2>
           <div className="text"> The  {col} unit's energy usage trend aggregated by {temporal || "month"}. 

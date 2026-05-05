@@ -25,7 +25,7 @@ export function AreaChart({data, temporal, device, width}){
           Plot.binX(
             {y: "sum"}, {
           x: "timestamp",
-          y: device || "Total Consumption",
+          y: device || "Total",
           interval:temporal || "month",
           fill: "url(#gradient)",
         })),
@@ -33,7 +33,7 @@ export function AreaChart({data, temporal, device, width}){
           Plot.binX(
             {y: "sum"}, {
           x: "timestamp",
-          y: device || "Total Consumption",
+          y: device || "Total",
           interval:temporal || "month",
           stroke: "steelblue",
         })),
