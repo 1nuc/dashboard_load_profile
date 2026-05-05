@@ -12,30 +12,29 @@ export const Report=()=>{
   }
   const filtered_data=useMemo(()=>{
     if (!flatten_data || flatten_data.length===0) return;
-    return [...flatten_data].sort((a, b) => b.value- a.value).slice(0,10);
-  }, [flatten_data]);
-  const cols=Object.keys(filtered_data[0]);
-  const something=flatten_data.reduce((group, item)=>{
-    group.device= (group.device || 0) + item.value;
+    return Object.entries(flatten_data.reduce((group, item)=>{
+    // if the device has been repeated then sum the value
+    // if not then take the value for the first time represented as item.value
+    // logic is similar to word count
+    group[item.device]= (group[item.device] || 0) + item.value;
     return group
-  },{});
-  console.log(something);
+    },{})).map(([device, value]) => ({device, value})
+      ).sort((a, b) => b.value- a.value).slice(0,10).map(d=> ({...d, value: d.value.toFixed(3)}));
+  }, [flatten_data]);
   return (
       <div className="report">
         <table>
           <thead>
             <tr>
-              {cols.map((val) => (
-                  <th key={val}> {val} </th>
-                ))}
+                <th> device</th>
+                <th> value</th>
             </tr>
           </thead>
           <tbody>
               {filtered_data.map((val, key) => (
               <tr key={key}>
-                <td> {val.timestamp.toLocaleDateString()} </td>
-                <td> {val.value} </td>
                 <td> {val.device} </td>
+                <td> {val.value} </td>
               </tr>
                 ))}
           </tbody>
