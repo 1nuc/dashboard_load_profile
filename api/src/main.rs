@@ -5,6 +5,7 @@ use tower_http::cors::{CorsLayer};
 use tracing::*;
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::fmt::init();
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();
     let app=Router::new()
         .route("/bldg", get(get_buildings))
