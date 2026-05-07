@@ -4,7 +4,6 @@ import './report.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
 import { AreaChart } from '../../components/plots-component/areachart'
 import html2pdf from 'html2pdf.js'
-import { useReactToPrint } from 'react-to-print'
 
 export const Report=()=>{
   // define the ref to be used to download this report as pdf
@@ -13,7 +12,7 @@ export const Report=()=>{
   const exportPDF = () => {
     const element = reportRef.current;
     const height = element.scrollHeight /3.8;
-    const width = element.scrollWidth / 7;
+    const width = element.scrollWidth / 8;
 
     const opt = {
       filename: `report-${building}.pdf`,

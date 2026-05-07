@@ -8,9 +8,10 @@ export const Metrics=()=>{
   const {isAdmin, setIsAdmin}=useContext(adminContext);
   const [metricsreq, setMetricsReq]=useState([]);
   const navigate=useNavigate();
+  const [isLoading, setIsLoading]=useState(false);
   useEffect(()=>{
     async function fetchMetrics(){
-      await getMetrics({setMetricsReq});
+      await getMetrics({setMetricsReq, setIsLoading});
     }
     fetchMetrics();
   }, []);
@@ -29,6 +30,13 @@ export const Metrics=()=>{
 
   return (
     <div className="metrics-page">
+      {
+        isLoading &&(
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+          </div>
+        )
+      }
       <button className="back" onClick={()=> navigate('/Home')}>Home</button>
       <div className="metrics">
         <table>
