@@ -2,7 +2,7 @@ use axum::{Router, extract::Path, http::HeaderValue, response::IntoResponse, rou
 use reqwest::{Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}};
 use tokio::net::TcpListener;
 use tower_http::cors::{CorsLayer};
-use log::*;
+use tracing::*;
 #[tokio::main]
 async fn main() {
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();

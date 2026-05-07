@@ -100,14 +100,19 @@ code {
   background: var(--code-bg);
 }
 button{
-  background: #19196E;
-  font-size: 24px;
+background: #19196E;
+  background-image:
+    radial-gradient(circle at 90% -5%, rgba(255, 255, 255, 0.8) 0%, transparent 45%),
+    radial-gradient(circle at 10% 110%, #3030D1 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, #19196E 0%, transparent 35%);
+  font-size: 24px; 
   border: 0;
   border-radius: 12px;
   height: 60px;
   cursor: pointer;
   width: 280px;
+  font-weight: 700;
 }
 button:hover{
-  background: #111138;
+  box-shadow: 0 0 20px rgba(48, 48, 209, 0.6);
 }
