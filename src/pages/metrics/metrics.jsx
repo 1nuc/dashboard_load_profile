@@ -54,6 +54,7 @@ export const Metrics=()=>{
                   <td> {val.R2_score} </td>
                   <td> {val.MAE} </td>
                   <td> {val.RMSE} </td>
+                  <td> {val.MAPPE} </td>
               </tr>
                 ))}
           </tbody>

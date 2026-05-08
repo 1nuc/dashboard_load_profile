@@ -8,6 +8,7 @@ async fn main() {
     tracing_subscriber::fmt::init();
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();
     let app=Router::new()
+        .route("/", get(check_server))
         .route("/bldg", get(get_buildings))
         .route("/predictions/{bldg_id}", get(get_data))
         .route("/metrics", get(get_metrics))
@@ -39,6 +40,23 @@ async fn get_data(Path(bldg_id): Path<String>) -> impl IntoResponse{
     }
 }
 
+
+async fn check_server() -> String{
+    let client=reqwest::Client::new();
+    let res=client.get("http://localhost:8000/").send().await;
+    info!("Checking the Status of the server");
+    match res{
+        Ok(msg) => {
+            info!("Server is Okay");
+            msg.text().await.unwrap()
+        } 
+
+        Err(_) => {
+            warn!("Error server is not active");
+            "error in server, server is not activated".to_string()
+        }
+    }
+}
 async fn get_metrics() -> String{
     let client=reqwest::Client::new();
     let res=client.get("http://localhost:8000/metrics").send().await;

@@ -42,7 +42,7 @@ export const Report=()=>{
     group[item.device]= (group[item.device] || 0) + item.value;
     return group
     },{})).map(([device, value]) => ({device, value})
-      ).sort((a, b) => b.value- a.value).slice(0,10).map(d=> ({...d, value: d.value.toFixed(3)}));
+      ).sort((a, b) => b.value- a.value).slice(0,11).map(d=> ({...d, value: d.value.toFixed(3)}));
   }, [flatten_data]);
 
   const dateTimeRange=flatten_data?.map(d=> d.timestamp);

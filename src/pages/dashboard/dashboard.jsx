@@ -42,7 +42,7 @@ export const Dashboard=()=>{
   }, [Data, startDate, endDate]);
 
   const flatten_data =useMemo(()=>{
-    if (!Data || Data.length===0) return;
+    if (!Data || Data.length===0) return [];
     const observation= Data.flatMap(d => [
       { timestamp: d.timestamp, value: d.AC, device: "AC" },
       { timestamp: d.timestamp, value: d.Total, device: "Total"},
@@ -70,9 +70,10 @@ export const Dashboard=()=>{
 
   const dateTimeRange=Data.map(d=> d.timestamp);
   const ExportReport= async()=>{
-    navigate('/Report', {state: {flatten_data, temporal, devData, building} });
+    navigate('/Report', {state: {flatten_data, temporal, devData, building, } });
   };
 
+  console.log(flatten_data)
   //extracting the columns of the data
   return (
     <div>
