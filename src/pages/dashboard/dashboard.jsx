@@ -73,7 +73,6 @@ export const Dashboard=()=>{
     navigate('/Report', {state: {flatten_data, temporal, devData, building, } });
   };
 
-  console.log(flatten_data)
   //extracting the columns of the data
   return (
     <div>
