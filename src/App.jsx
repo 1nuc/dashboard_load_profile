@@ -22,11 +22,9 @@ function App() {
   return (
       <adminContext.Provider value={{isAdmin, setIsAdmin}}>
       {status? (
-        <div className="online-confirm">
           <h2 className="okay-text">
             Server Connection is Successful
           </h2>
-        </div>
         ):(
           <div className="loading-spinner">
           <h2 className="warning-text">

@@ -1,8 +1,15 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --text: #374151;
+  --text-h: #1f2028;
+  --bg: #EDF5F5;
+  --border: #e5e7eb;
+  --code-bg: #f3f4f6;
+  --sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --heading: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --mono: monospace;
+  font-family: var(--sans);
   line-height: 1.5;
   font-weight: 400;
-  font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -12,16 +19,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+}
+@media (max-width: 1024px) {
+  :root { font-size: 16px; }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #1f2028;
+    --text: #8ca3af;
+    --text-h: #0f2028;
     --bg: white;
     --border: #2e303a;
     --code-bg: #1f2028;
@@ -56,24 +62,23 @@ h2 {
   font-weight: 500;
   color: var(--text-h);
 }
-
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
 }
+@media (max-width: 1024px) {
+  h1 { font-size: 36px; margin: 20px 0; }
+}
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+}
+@media (max-width: 1024px) {
+  h2 { font-size: 20px; }
 }
 p {
   margin: 0;

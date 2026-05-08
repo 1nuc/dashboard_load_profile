@@ -14,7 +14,7 @@ struct ServerUrl{
 async fn main() {
     tracing_subscriber::fmt::init();
     let shared_state=Arc::new(ServerUrl{
-        url: "https://localhost:8000",
+        url: "http://localhost:8000",
     });
 
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();
@@ -29,7 +29,7 @@ async fn main() {
 
 fn cors()-> CorsLayer{
     CorsLayer::new()
-        .allow_origin("http://localhost:5173".parse::<HeaderValue>().unwrap())
+        .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
         .allow_methods([Method::GET])
         .allow_headers([ACCEPT,AUTHORIZATION, CONTENT_TYPE])
 }
@@ -56,6 +56,7 @@ async fn get_data(State(state):State<Arc<ServerUrl>>,Path(bldg_id): Path<String>
 async fn check_server(State(state):State<Arc<ServerUrl>>) -> String{
     let client=reqwest::Client::new();
     let url=state.url;
+    println!("{:?}", url);
     let res=client.get(format!("{url}"))
         .send().await;
     info!("Checking the Status of the server");
