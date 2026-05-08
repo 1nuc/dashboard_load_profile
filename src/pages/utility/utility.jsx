@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import './utility.css'
 
 
 export function UtilityView (){

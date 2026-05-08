@@ -12,20 +12,30 @@ import { checkServer } from './services/checkServer'
 function App() {
   const [isAdmin, setIsAdmin]=useState(false);
   const [status, setStatus]=useState(false);
+  const [render, setRender]=useState(false);
   useEffect(()=>{
     async function checkServerStatus(){
       await checkServer({setStatus});
     }
     checkServerStatus();
   }, []);
-  console.log(status);
+
+  useEffect(() => {
+    if (status) {
+      setRender(true);
+      const timer = setTimeout(() => setRender(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   return (
       <adminContext.Provider value={{isAdmin, setIsAdmin}}>
-      {status? (
+      {render && (
           <h2 className="okay-text">
             Server Connection is Successful
           </h2>
-        ):(
+        )}
+      {!status &&(
           <div className="loading-spinner">
           <h2 className="warning-text">
             Server is offline, ensure the server is online and refresh the page
