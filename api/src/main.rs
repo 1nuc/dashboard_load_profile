@@ -14,10 +14,10 @@ struct ServerUrl{
 async fn main() {
     tracing_subscriber::fmt::init();
     let shared_state=Arc::new(ServerUrl{
-        url: "http://localhost:8000",
+        url: "https://overlaid-occultist-unnamed.ngrok-free.dev",
     });
 
-    let addrs=TcpListener::bind("localhost:8080").await.unwrap();
+    let addrs=TcpListener::bind("0.0.0.0:8080").await.unwrap();
     let app=Router::new()
         .route("/", get(check_server))
         .route("/bldg", get(get_buildings))
