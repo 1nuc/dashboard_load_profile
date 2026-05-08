@@ -1,7 +1,7 @@
 export const GetPredictions=async ({setData, building, setIsLoading})=>{
   try{
     setIsLoading(true);
-    const response=await fetch(`${import.meta.env.VITE_API_URL}/${building}`);
+    const response=await fetch(`${import.meta.env.VITE_API_URL}/predictions/${building}`);
     if (!response.ok){
       throw new Error("error in getting the resopnse");
     }
