@@ -2,7 +2,7 @@
 export const GetBuildings=async ({setBuildings})=>{
   try{
 
-    const response=await fetch(`${import.meta.env.API_URL}/bldg`);
+    const response=await fetch(`${import.meta.env.VITE_API_URL}/bldg`);
     if (!response.ok){
       throw new Error("error in getting the resopnse");
     }
