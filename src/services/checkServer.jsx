@@ -1,7 +1,7 @@
 export const checkServer=async ({setStatus})=>{
   try{
     setStatus(false);
-    const response=await fetch("http://localhost:8080/");
+    const response=await fetch(`${import.meta.env.API_URL}`);
     if (!response.ok){
       throw new Error("error in getting the resopnse");
     }

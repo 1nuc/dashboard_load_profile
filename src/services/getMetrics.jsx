@@ -2,7 +2,7 @@ export const getMetrics=async ({setMetricsReq, setIsLoading})=>{
   try{
 
     setIsLoading(true);
-    const response=await fetch("http://localhost:8080/metrics");
+    const response=await fetch(`${import.meta.env.API_URL}/metrics`);
     if (!response.ok){
       throw new Error("error in getting the resopnse");
     }
