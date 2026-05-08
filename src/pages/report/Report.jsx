@@ -1,6 +1,5 @@
 import { useState, useContext, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './report.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
 import { AreaChart } from '../../components/plots-component/areachart'
 import html2pdf from 'html2pdf.js'

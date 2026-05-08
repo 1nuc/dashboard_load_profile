@@ -1,6 +1,5 @@
 import { getMetrics } from '../../services/getMetrics';
 import { useState, useEffect, useContext } from 'react';
-import './metrics.css';
 import { adminContext } from '../../components/AdminContext/adminContext';
 import { useNavigate } from 'react-router-dom'
 
