@@ -8,11 +8,32 @@ import { HomePanel } from './pages/Home/home'
 import { Report } from './pages/report/Report'
 import { Metrics } from './pages/metrics/metrics'
 import { adminContext } from './components/AdminContext/adminContext'
-
+import { checkServer } from './services/checkServer'
 function App() {
   const [isAdmin, setIsAdmin]=useState(false);
+  const [status, setStatus]=useState(false);
+  useEffect(()=>{
+    async function checkServerStatus(){
+      await checkServer({setStatus});
+    }
+    checkServerStatus();
+  }, []);
+  console.log(status);
   return (
       <adminContext.Provider value={{isAdmin, setIsAdmin}}>
+      {status? (
+        <div className="online-confirm">
+          <h2 className="okay-text">
+            Server Connection is Successful
+          </h2>
+        </div>
+        ):(
+          <div className="loading-spinner">
+          <h2 className="warning-text">
+            Server is offline, ensure the server is online and refresh the page
+          </h2>
+          </div>
+      )}
       <BrowserRouter>
           <Routes>
               <Route path='/dashboard' element={ <Dashboard/>}/>

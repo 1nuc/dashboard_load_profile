@@ -127,3 +127,29 @@ body {
   border:7.5 solid #19194F;
   border-radius: 10px;
 }
+.warning-text{
+  color: red;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2.5px solid rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+}
+.okay-text{
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: 30px;
+  color: green;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2.5px solid rgba(255, 255, 255, 0.5);
+  animation: fadeOutBanner 3s forwards;
+}
+
+@keyframes fadeOutBanner {
+  0%   { opacity: 0; transform: scale(0.8) translateY(-20px); }
+  15%  { opacity: 1; transform: scale(1.05) translateY(0); }
+  25%  { opacity: 1; transform: scale(1) translateY(0); }
+  75%  { opacity: 1; transform: scale(1) translateY(0); }
+  90%  { opacity: 0; transform: scale(1.05) translateY(-10px); }
+  100% { opacity: 0; transform: scale(0.8) translateY(-20px); max-height: 0; overflow: hidden; }
+}
