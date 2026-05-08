@@ -1,0 +1,212 @@
+---
+- name: Load Profile Decomposition Deployment
+  gather_facts: true
+  hosts: load_profile-server
+
+  vars:
+    project_file: "/home/ahmedthegoat/dashboard_load_profile"
+    private_key: '/home/ahmedthegoat/.ssh/deployment'
+    repo_url: 'https://github.com/1nuc/dashboard_load_profile'
+
+  tasks:
+    - name: Install Required builds
+      ansible.builtin.apt:
+        name:
+          - curl
+          - python3-paramiko
+          - snapd
+          - git
+        state: present
+        update_cache: yes
+      become: true
+
+    - name: Remove existing Node.js completely
+      ansible.builtin.apt:
+        name:
+          - nodejs
+          - npm
+        state: absent
+        purge: yes
+      become: true
+
+    - name: Remove leftover node binaries
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /usr/bin/node
+        - /usr/bin/nodejs
+        - /usr/bin/npm
+        - /usr/local/bin/node
+        - /usr/local/bin/npm
+      become: true
+      ignore_errors: true
+
+    - name: Add NodeSource repository and install Node.js
+      ansible.builtin.shell: |
+        curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+      become: true
+
+    - name: Install Node.js 22 from NodeSource
+      ansible.builtin.apt:
+          name: nodejs
+          state: present
+          update_cache: yes
+      become: true
+
+    - name: Define Public Keys for github
+      ansible.builtin.known_hosts:
+        name: github.com
+        key: "{{ item }}"
+        path: ~/.ssh/known_hosts
+        state: present
+      loop: "{{ known_hosts }}"
+
+    - name: Copy ssh private to the machine
+      ansible.builtin.copy:
+        src: '~/.ssh/deployment'
+        dest: '{{ private_key }}'
+        owner: ahmedthegoat
+        group: ahmedthegoat
+        mode: 0600
+
+    - name: Copy ssh public to the machine
+      ansible.builtin.copy:
+        src: '~/.ssh/deployment.pub' 
+        dest: '~/.ssh/deployment.pub'
+        owner: ahmedthegoat
+        group: ahmedthegoat
+        mode: 0644
+
+    - name: configure ssh keys for cloning repositories
+      community.general.ssh_config:
+        user: ahmedthegoat 
+        host: github.com 
+        hostname: github.com
+        identity_file: '{{ private_key }}'
+        state: present
+        strict_host_key_checking: true
+        user_known_hosts_file: ~/.ssh/known_hosts
+
+    - name: Clone Repository
+      ansible.builtin.git:
+        repo: '{{ repo_url }}'
+        dest:  '{{ project_file }}'
+        clone: true
+        update: yes 
+        force: yes
+        depth: 1
+        version: main
+
+    - name: clean npm cache
+      ansible.builtin.command: npm cache clean --force
+      args:
+        chdir: "{{ project_file }}"
+
+    - name: clean previous dist folder
+      ansible.builtin.file:
+        path: "{{ project_file }}/dist"
+        state: absent
+
+    - name: Install required dependencies
+      ansible.builtin.command: npm install 
+      args:
+        chdir: "{{ project_file }}"
+      become: true
+
+    - name: Install React builder serve
+      ansible.builtin.command: npm install serve
+      args:
+        chdir: "{{ project_file }}"
+      become: true
+    - name: building the dashboard for production
+      ansible.builtin.command: npm run build 
+      args:
+        chdir: "{{ project_file }}" 
+
+    - name: Create serve systemd service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/dashboard.service
+        content: |
+          [Unit]
+          Description=Dashboard Serve
+          After=network.target
+
+          [Service]
+          WorkingDirectory={{ project_file }}
+          ExecStart={{ project_file }}/node_modules/.bin/serve -s dist -l 3000
+          Restart=always
+          User=ahmedthegoat
+
+          [Install]
+          WantedBy=multi-user.target
+      become: true
+
+    - name: Reload systemd and start dashboard
+      ansible.builtin.systemd:
+        name: dashboard
+        daemon_reload: yes
+        state: restarted
+        enabled: yes
+      become: true
+
+    - name: install docker
+      community.general.snap:
+        name: docker
+        state: present 
+      become: true
+
+    - name: create a custom docker network 
+      community.docker.docker_network:
+        name: load-profile-net
+      become: true
+    
+    # backend container
+    - name: get containers info
+      community.docker.docker_container_info:
+        name: api-container
+      register: backend_container
+      tags:
+        - info
+      become: true
+    # Stop the running container
+    - name: Stop the backend running container
+      community.docker.docker_container:
+        name: api-container
+        state: stopped
+      when: backend_container.exists == true
+      become: true
+    # Delete the container
+    - name: Delete backend container
+      community.docker.docker_container:
+        name: api-container
+        state: absent
+      become: true
+    # Delete the image
+    - name: Delete the backend image
+      community.docker.docker_image:
+        state: absent
+        name: api 
+      become: true
+
+    - name: Rebuilding the docker image
+      community.docker.docker_image:
+        name: api
+        build:
+          path: '{{ project_file }}/api'  
+          dockerfile: 'Dockerfile'
+        source: build
+      become: true
+    # Rebuild the backend container
+    - name: Rebuiding backend container
+      community.docker.docker_container:
+        name: api-container
+        image: api
+        state: started
+        restart_policy: always
+        networks:
+          - name: bridge
+          - name: load-profile-net
+        ports:
+          - '8080:8080'
+      become: true
