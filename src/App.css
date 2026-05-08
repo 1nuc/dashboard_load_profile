@@ -153,6 +153,9 @@ body {
   100% { opacity: 0; transform: scale(0.8) translateY(-20px); max-height: 0; overflow: hidden; }
 }
 
+/* =============================== */
+/* Metrics page */
+/* =============================== */
 .metrics-page{
   display: flex;
   margin-top: 20px;
@@ -202,6 +205,9 @@ th:hover{
     color: #19194F;
 }
 
+/* ====================== */
+/* Report Page */
+/* ====================== */
 .report, .contents{
   display: flex;
   justify-content: center;
@@ -262,4 +268,66 @@ th:hover{
     height: auto;
     background: rgba(255, 255, 255, 0.5);
     border-collapse: collapse;
+}
+
+
+/* ====================== */
+/* buildings Page */
+/* ====================== */
+.buildings-panel{
+    
+  background-image:
+  radial-gradient(circle at 90% -5%, #B8E0E0  0%, transparent 25%),
+  radial-gradient(circle at 10% 110%, #ffffff 0%, transparent 65%),
+  radial-gradient(circle at 50% 50%, #ffffff 0%, transparent 55%);
+  overflow-y: auto;
+  height: 100vh;
+}
+.building-view{
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  padding: 10px; 
+  gap: 12px;
+}
+.bldg-view{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 150px;
+  background-color: #EDF5F5;
+  padding: 30px;
+  color:  #19196E;
+  font-size: 22px;
+  border-radius: 20px;
+  box-shadow: 0 12px 15px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  width: 150px;
+}
+.bldg-view:hover{
+  background-color: #B8D8DA;
+  transform: scale(0.95);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.search-bldg{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.bldg-search{
+  font-size:22px;
+  border-radius: 20px;
+  background-color: #DCE4E6;
+  border: 0;
+  height: 60px;
+  width: 600px;
+  padding: 10px;
+  margin: 40px 2px ;
+  resize: none;
+  color: black;
 }
