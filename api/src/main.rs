@@ -1,18 +1,29 @@
-use axum::{Router, extract::Path, http::HeaderValue, response::IntoResponse, routing::get, serve};
+use std::sync::Arc;
+
+use axum::{Router, extract::{Path, State}, http::HeaderValue, response::IntoResponse, routing::get, serve};
 use reqwest::{Method, header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE}};
 use tokio::net::TcpListener;
 use tower_http::cors::{CorsLayer};
 use tracing::*;
+
+struct ServerUrl{
+    url: &'static str,
+}
+
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
+    let shared_state=Arc::new(ServerUrl{
+        url: "https://localhost:8000",
+    });
+
     let addrs=TcpListener::bind("localhost:8080").await.unwrap();
     let app=Router::new()
         .route("/", get(check_server))
         .route("/bldg", get(get_buildings))
         .route("/predictions/{bldg_id}", get(get_data))
         .route("/metrics", get(get_metrics))
-        .layer(cors());
+        .layer(cors()).with_state(shared_state);
     serve(addrs, app).await.unwrap();
 }
 
@@ -23,10 +34,11 @@ fn cors()-> CorsLayer{
         .allow_headers([ACCEPT,AUTHORIZATION, CONTENT_TYPE])
 }
 
-async fn get_data(Path(bldg_id): Path<String>) -> impl IntoResponse{
+async fn get_data(State(state):State<Arc<ServerUrl>>,Path(bldg_id): Path<String>) -> impl IntoResponse{
     let client=reqwest::Client::new();
+    let url=state.url;
     info!("Requesting data from the modelling server");
-    let res=client.get(format!("http://localhost:8000/predictions/{bldg_id}"))
+    let res=client.get(format!("{url}/predictions/{bldg_id}"))
         .send().await;
     match res{
         Ok(msg) => {
@@ -41,9 +53,11 @@ async fn get_data(Path(bldg_id): Path<String>) -> impl IntoResponse{
 }
 
 
-async fn check_server() -> String{
+async fn check_server(State(state):State<Arc<ServerUrl>>) -> String{
     let client=reqwest::Client::new();
-    let res=client.get("http://localhost:8000/").send().await;
+    let url=state.url;
+    let res=client.get(format!("{url}"))
+        .send().await;
     info!("Checking the Status of the server");
     match res{
         Ok(msg) => {
@@ -57,9 +71,10 @@ async fn check_server() -> String{
         }
     }
 }
-async fn get_metrics() -> String{
+async fn get_metrics(State(state): State<Arc<ServerUrl>>) -> String{
     let client=reqwest::Client::new();
-    let res=client.get("http://localhost:8000/metrics").send().await;
+    let url=state.url;
+    let res=client.get(format!("{url}/metrics")).send().await;
     info!("Requesting Metrics from the modelling server");
     match res{
         Ok(msg) => {
@@ -74,10 +89,11 @@ async fn get_metrics() -> String{
     }
 }
 
-async fn get_buildings() -> String{
+async fn get_buildings(State(state):State<Arc<ServerUrl>>) -> String{
     let client=reqwest::Client::new();
+    let url=state.url;
     info!("Requesting buildings from the modelling server");
-    let res=client.get("http://localhost:8000/buildings").send().await;
+    let res=client.get(format!("{url}/buildings")).send().await;
     match res{
         Ok(msg) => {
             info!("Buildings received successfully");
