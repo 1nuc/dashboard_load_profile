@@ -16,6 +16,7 @@ RUN cargo build --release --bin api
 # We do not need the Rust toolchain to run the binary!
 FROM debian:trixie-slim AS runtime
 WORKDIR /api
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /api/target/release/api /usr/local/bin
 
 EXPOSE 8080
