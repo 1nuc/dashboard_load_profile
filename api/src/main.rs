@@ -31,6 +31,7 @@ async fn main() {
 fn cors()-> CorsLayer{
     CorsLayer::new()
         .allow_origin("http://34.70.98.219:3000".parse::<HeaderValue>().unwrap())
+        .allow_origin("http://decomposeengine.com:3000".parse::<HeaderValue>().unwrap())
         .allow_methods([Method::GET])
         .allow_headers([ACCEPT,AUTHORIZATION, CONTENT_TYPE])
 }
