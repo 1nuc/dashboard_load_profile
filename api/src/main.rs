@@ -14,7 +14,8 @@ struct ServerUrl{
 async fn main() {
     tracing_subscriber::fmt::init();
     let shared_state=Arc::new(ServerUrl{
-        url: "https://overlaid-occultist-unnamed.ngrok-free.dev",
+        url:"https://nrel.serveousercontent.com",
+
     });
 
     let addrs=TcpListener::bind("0.0.0.0:8080").await.unwrap();
