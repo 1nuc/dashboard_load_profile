@@ -120,45 +120,28 @@
       args:
         chdir: "{{ project_file }}"
       become: true
+
     - name: building the dashboard for production
       ansible.builtin.command: npm run build 
       args:
         chdir: "{{ project_file }}" 
 
-    - name: Remove Old contents of the www browser
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - "{{ lookup('ansible.builtin.fileglob', '/var/www/dashboard/dist/*', wantlist=True) }}"
-
-    - name: Ensure browser folder exists 
-      ansible.builtin.file:
-        path: /var/www/dashboard/dist
-        state: directory
-        owner: www-data
-        group: www-data
-        mode: '0775'
-        recurse: yes
-      become: true
-      tags:
-      - browser
-
-    - name: copy the browser build
-      ansible.builtin.command: rsync -av --delete "/home/ahmedthegoat/dashboard_load_profile/dist/" "/var/www/dashboard/dist/"
-      become: true
-
+    - name: Start the frontend
+      ansible.builtin.shell: |
+        nohup npx serve -s dist -l 3000 &
+      args:
+        chdir: "{{ project_file }}"
 
     - name: Copy Caddy Configuration 
       ansible.builtin.copy:
         src: 'Caddyfile'
         dest: '/etc/caddy/'
-        mode: 0700
+        mode: 0644
       become: true
 
     - name: Starting and enabling caddy 
       ansible.builtin.systemd_service:
-        name: nginx 
+        name: caddy 
         state: reloaded 
         enabled: true
 
