@@ -16,6 +16,7 @@
           - python3-paramiko
           - snapd
           - git
+          - caddy
         state: present
         update_cache: yes
       become: true
@@ -124,31 +125,42 @@
       args:
         chdir: "{{ project_file }}" 
 
-    - name: Create serve systemd service
+    - name: Remove Old contents of the www browser
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ lookup('ansible.builtin.fileglob', '/var/www/dashboard/dist/*', wantlist=True) }}"
+
+    - name: Ensure browser folder exists 
+      ansible.builtin.file:
+        path: /var/www/dashboard/dist
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0775'
+        recurse: yes
+      become: true
+      tags:
+      - browser
+
+    - name: copy the browser build
+      ansible.builtin.command: rsync -av --delete "/home/ahmedthegoat/dashboard_load_profile/dist/" "/var/www/dashboard/dist/"
+      become: true
+
+
+    - name: Copy Caddy Configuration 
       ansible.builtin.copy:
-        dest: /etc/systemd/system/dashboard.service
-        content: |
-          [Unit]
-          Description=Dashboard Serve
-          After=network.target
-
-          [Service]
-          WorkingDirectory={{ project_file }}
-          ExecStart={{ project_file }}/node_modules/.bin/serve -s dist -l 3000
-          Restart=always
-          User=ahmedthegoat
-
-          [Install]
-          WantedBy=multi-user.target
+        src: 'Caddyfile'
+        dest: '/etc/caddy/'
+        mode: 0700
       become: true
 
-    - name: Reload systemd and start dashboard
-      ansible.builtin.systemd:
-        name: dashboard
-        daemon_reload: yes
-        state: restarted
-        enabled: yes
-      become: true
+    - name: Starting and enabling caddy 
+      ansible.builtin.systemd_service:
+        name: nginx 
+        state: reloaded 
+        enabled: true
 
     - name: install docker
       community.general.snap:
