@@ -14,8 +14,7 @@ struct ServerUrl{
 async fn main() {
     tracing_subscriber::fmt::init();
     let shared_state=Arc::new(ServerUrl{
-        // url:"https://nrel.serveousercontent.com",
-        url:"http://localhost:8000",
+        url:"https://nrel.serveousercontent.com",
     });
 
     let addrs=TcpListener::bind("0.0.0.0:8080").await.unwrap();
