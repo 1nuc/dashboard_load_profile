@@ -12,10 +12,9 @@ import { KPI } from '../../components/KPI/kpi'
 import { Cards } from '../../components/KPI/cards'
 import { Report } from '../report/Report'
 
-export const Dashboard=()=>{
+export const Dashboard=({data, setData, currentBuilding, setCurrentBuilding})=>{
   // use the global location to render the buildilng ID
 
-  const [data, setData]=useState([]);
   const navigate=useNavigate();
   const globalState=useLocation();
   const building= globalState.state?.building;
@@ -26,6 +25,8 @@ export const Dashboard=()=>{
   const [device, setDevice]=useState("");
 
   useEffect(()=>{
+    if (data.length > 0 && currentBuilding === building) return;
+    setCurrentBuilding(building);
     async function fetchData(){
       await GetPredictions({setData, building, setIsLoading});
     }

@@ -36,7 +36,7 @@ export const Metrics=()=>{
           </div>
         )
       }
-      <button className="back" onClick={()=> navigate('/Home')}>Home</button>
+      <button className="back" onClick={()=> navigate(-1)}> Back</button>
       <div className="metrics">
         <table>
           <thead>

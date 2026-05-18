@@ -21,6 +21,19 @@ function AdminLogin(props){
   const [userName, setUserName]= useState('');
   const [password, setPassword]= useState('');
   const navigate=useNavigate();
+  const handleKeyDownUserName= (e) =>{
+    if (e.key ==='Enter'){
+      e.preventDefault();
+      document.querySelector('.password-label').focus();
+    }
+  }
+  const handleKeyDownPassword=(e) =>{
+    if (e.key ==='Enter'){
+      e.preventDefault();
+      setIsAdmin(true);
+      fetchBuidings({userName, password, buildings: props.buildings, navigate});
+    }
+  }
   return(
     <>
       {
@@ -30,6 +43,7 @@ function AdminLogin(props){
               <label> 
                 <textarea className="username-label" 
                 value={userName} 
+                onKeyDown={handleKeyDownUserName} // change the cursor to the password label
                 onChange={
                   (e)=> setUserName(e.target.value)
                 } placeholder="username"/>
@@ -37,6 +51,7 @@ function AdminLogin(props){
               <label>
                 <textarea className="password-label"
                 value={password}
+                onKeyDown={handleKeyDownPassword}
                 onChange={
                   (e)=> setPassword(e.target.value)
                 } placeholder="password"/>
@@ -71,6 +86,15 @@ export const HomePanel=() =>{
   const [bldg_id, setBldg_id]=useState('');
   const [isOpen, setIsOpen]=useState(false);
 
+  const handleKeyDown= (e) =>{
+    if (e.key ==='Enter'){
+      e.preventDefault();
+      setIsAdmin(false);
+      checkBuilding({buildings, bldg_id, navigate});
+
+    }
+  }
+
   useEffect(()=>{
     async function fetchData(){
        await GetBuildings({setBuildings});
@@ -84,7 +108,7 @@ export const HomePanel=() =>{
       <AdminLogin isOpen={isOpen} setIsOpen={setIsOpen} buildings={buildings}/>
       <div className="input-card">
             <label className="input-label">
-                 <textarea className="bldg-id" value={bldg_id} onChange={(e)=> setBldg_id(e.target.value)} 
+                 <textarea className="bldg-id" value={bldg_id} onKeyDown={handleKeyDown} onChange={(e)=> setBldg_id(e.target.value)} 
         placeholder='Enter your building ID, ex. 171237'/>
             </label>
             <button onClick={()=>{

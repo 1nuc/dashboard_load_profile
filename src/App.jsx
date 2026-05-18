@@ -13,6 +13,8 @@ function App() {
   const [isAdmin, setIsAdmin]=useState(false);
   const [status, setStatus]=useState(false);
   const [render, setRender]=useState(false);
+  const [data, setData]=useState([]);
+  const [building, setBuilding]=useState("");
   useEffect(()=>{
     async function checkServerStatus(){
       await checkServer({setStatus});
@@ -44,7 +46,7 @@ function App() {
       )}
       <BrowserRouter>
           <Routes>
-              <Route path='/dashboard' element={ <Dashboard/>}/>
+              <Route path='/dashboard' element={ <Dashboard data={data} setData={setData} currentBuilding={building} setCurrentBuilding={setBuilding}/>}/>
               <Route path='/utilityView' element={ <UtilityView/>}/>
               <Route path='/' element={ <HomePanel/>}/>
               <Route path='/Home' element={ <HomePanel/>}/>

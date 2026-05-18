@@ -9,7 +9,6 @@ export default function Navbar(props){
   const [visible, setVisible] =useState(false);
   const sidebar_elements = [
     { id: 1, panel: "home" },
-    { id: 2, panel: "dashboard" },
     { id: 3, panel: "report" },
     { id: 4, panel: "metrics" },
   ];

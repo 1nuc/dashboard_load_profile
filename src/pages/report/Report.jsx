@@ -52,7 +52,7 @@ export const Report=()=>{
   const col=filtered_data.slice(0,2)[1].device;
   return (
     <div className="contents">
-      <button className="back" onClick={()=> navigate('/Home')}>Home</button>
+      <button className="back" onClick={()=> navigate(-1)}>Back</button>
       <button onClick={exportPDF}>Download PDF</button>
       <div className="report" ref={reportRef}>
         <h2 className="header-report">Load Profile Decomposition Report </h2>
