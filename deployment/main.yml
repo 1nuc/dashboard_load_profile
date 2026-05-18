@@ -144,6 +144,7 @@
         name: caddy 
         state: reloaded 
         enabled: true
+      become: true
 
     - name: install docker
       community.general.snap:
