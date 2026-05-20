@@ -1,18 +1,27 @@
-# React + Vite
+## Dashboard for Residential Energy Load Profile
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### To run the code in development mode type in the terminal 
 
-Currently, two official plugins are available:
+`npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### To build the project for production wise deployment
 
-## React Compiler
+`npm build`
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### To run the Axum backend
 
-Note: This will impact Vite dev & build performances.
+- ensure to have another terminal splitter tool for parallel execution
 
-## Expanding the ESLint configuration
+example: `sudo dnf install tmux`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+`tmux`
+
+split the terminal: 
+`ctrl+ B + "`
+
+move to the next termina and run the backend:
+`ctr + B+ Left\Right`
+
+`cd root/api/src/`
+
+`cargo r --release`
